@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./LoginForm.module.css";
-import { account, ID } from "../../appwrite";
+import { account, ID } from "../../appwrite.js";
 
 interface User {
   name: string;
