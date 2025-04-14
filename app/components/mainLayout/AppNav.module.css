@@ -2,8 +2,11 @@
   display: flex;
   justify-content: space-around;
 
+}
+
+.app-nav {
   background-color: var(--primary);
-  position: sticky;
+  position: absolute;
   bottom: 0;
 }
 
