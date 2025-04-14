@@ -4,6 +4,7 @@ import "./globals.css";
 import App from "next/app";
 import AppHeader from "./components/mainLayout/AppHeader";
 import AppNav from "./components/mainLayout/AppNav";
+import AppFooter from "./components/mainLayout/Footer/AppFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AppHeader />
         <main>{children}</main>
+        <AppFooter />
         <AppNav />
       </body>
     </html>
