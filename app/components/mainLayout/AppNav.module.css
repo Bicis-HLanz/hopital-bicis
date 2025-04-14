@@ -1,0 +1,13 @@
+.app-nav ul {
+  display: flex;
+  justify-content: space-around;
+
+  background-color: var(--primary);
+  position: sticky;
+  bottom: 0;
+}
+
+.app-nav ul li {
+  list-style: none;
+  padding: 1rem;
+}
