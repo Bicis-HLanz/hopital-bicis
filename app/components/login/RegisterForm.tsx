@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import styles from "./LoginForm.module.css";
 import { account, ID } from "../../appwrite.js";
-import Link from "next/link";
 import { AppwriteException } from "appwrite";
+import LogoutForm from "./LogoutForm";
 
 interface User {
   name: string;
@@ -58,12 +58,7 @@ const RegisterForm: React.FC = () => {
 
   if (loggedInUser) {
     return (
-      <div>
-        <p>Sesión iniciada como {loggedInUser.name}</p>
-        <button type="button" onClick={logOut}>
-          Cerrar sesión
-        </button>
-      </div>
+      <LogoutForm logout={logOut} loggedInUser={loggedInUser} />
     );
   }
 
@@ -101,13 +96,6 @@ const RegisterForm: React.FC = () => {
       <button type="button" onClick={() => register()}>
         Registrarse
       </button>
-
-      <p className={styles["register-link"]}>
-        ¿No tienes cuenta aún?
-        <Link href="/registo">
-          Regístrate
-        </Link>
-      </p>
     </form>
   );
 };

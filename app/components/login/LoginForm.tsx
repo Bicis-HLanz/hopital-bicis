@@ -5,6 +5,7 @@ import styles from "./LoginForm.module.css";
 import { account } from "../../appwrite.js";
 import Link from "next/link";
 import { AppwriteException } from "appwrite";
+import LogoutForm from "./LogoutForm";
 
 interface User {
   name: string;
@@ -47,12 +48,7 @@ const LoginForm: React.FC = () => {
 
   if (loggedInUser) {
     return (
-      <div>
-        <p>Sesión iniciada como {loggedInUser.name}</p>
-        <button type="button" onClick={logOut}>
-          Cerrar sesión
-        </button>
-      </div>
+      <LogoutForm logout={logOut} loggedInUser={loggedInUser} />
     );
   }
 
