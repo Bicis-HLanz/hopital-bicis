@@ -15,6 +15,25 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
 
+  // Check if the user is already logged in
+  React.useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const user = await account.get();
+        setLoggedInUser(user as User);
+      } catch (error: any) {
+        if (error.code === 401) {
+          // User is not logged in, this is expected
+          setLoggedInUser(null);
+        } else {
+          console.error("Unexpected error fetching user session:", error);
+        }
+      }
+    };
+
+    checkSession();
+  }, []);
+
   const iniciarSesion = async (email: string, password: string): Promise<void> => {
     const session = await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get() as User);
