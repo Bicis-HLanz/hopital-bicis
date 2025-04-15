@@ -7,7 +7,6 @@ import { account, ID } from "../../appwrite.js";
 interface User {
   name: string;
   email: string;
-  // Add other properties if needed
 }
 
 const LoginForm: React.FC = () => {
@@ -16,17 +15,17 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
 
-  const login = async (email: string, password: string): Promise<void> => {
+  const iniciarSesion = async (email: string, password: string): Promise<void> => {
     const session = await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get() as User);
   };
 
-  const register = async (): Promise<void> => {
+  const registrar = async (): Promise<void> => {
     await account.create(ID.unique(), email, password, name);
-    await login(email, password);
+    await iniciarSesion(email, password);
   };
 
-  const logout = async (): Promise<void> => {
+  const cerrarSesion = async (): Promise<void> => {
     await account.deleteSession("current");
     setLoggedInUser(null);
   };
@@ -34,9 +33,9 @@ const LoginForm: React.FC = () => {
   if (loggedInUser) {
     return (
       <div>
-        <p>Logged in as {loggedInUser.name}</p>
-        <button type="button" onClick={logout}>
-          Logout
+        <p>Sesión iniciada como {loggedInUser.name}</p>
+        <button type="button" onClick={cerrarSesion}>
+          Cerrar sesión
         </button>
       </div>
     );
@@ -44,31 +43,37 @@ const LoginForm: React.FC = () => {
 
   return (
     <form className={styles["login-form"]}>
-      <h1>Login</h1>
+      <h1>Iniciar Sesión</h1>
       <input
         type="email"
-        placeholder="Email"
+        placeholder="Correo electrónico"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        className={styles["email-input"]}
       />
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className={styles["email-input"]}
       />
       <input
         type="text"
-        placeholder="Name"
+        placeholder="Nombre"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        className={styles["email-input"]}
       />
-      <button type="button" onClick={() => login(email, password)}>
-        Login
+      <button type="button" onClick={() => iniciarSesion(email, password)}>
+        Iniciar Sesión
       </button>
-      <button type="button" onClick={register}>
-        Register
-      </button>
+      <p className={styles["register-link"]}>
+        ¿No tienes cuenta aún?{" "}
+        <a href="./registo" onClick={registrar}>
+          Regístrate
+        </a>
+      </p>
     </form>
   );
 };

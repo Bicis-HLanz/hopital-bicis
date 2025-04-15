@@ -1,3 +1,20 @@
+.register-link {
+  color: #33333395;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.register-link a {
+  color: #72694695;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: var(--accent);
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -6,30 +23,18 @@
   padding: 2rem;
   background-color: white; 
   border-radius: 8px;
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
   max-width: 400px;
   margin: 0 auto;
 }
 
 .login-form h1{
-    color: var(--secondary);
+    color: var(--primary);
     margin-bottom: 0.5em;
 }
 
-.login-form div {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.login-form label {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--accent); 
-  margin-bottom: 0.5rem;
-}
-
-.login-form input {
+.email-input {
+  margin: 2% 0;
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--border-color, #ccc); 
@@ -41,12 +46,13 @@
 
 .login-form input:focus {
   outline: none;
-  border-color: var(--primary-color, #007bff); 
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: var(--accent); 
+  box-shadow: 0 0 0 2px rgba(255, 166, 0, 0.25);
 }
 
 .login-form button {
   width: 100%;
+  margin: 2% 0;
   padding: 0.75rem;
   font-size: 1rem;
   font-weight: bold;
