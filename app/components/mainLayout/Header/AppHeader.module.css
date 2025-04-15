@@ -1,0 +1,16 @@
+.app-header {
+  display: flex;
+  background-color: var(--primary);
+}
+.app-header a{
+  display: flex;
+  margin: 1% 2%;
+}
+
+.app-header img{
+  margin-right: 1rem;
+}
+
+.app-header h1{
+  color: #fff;
+}
