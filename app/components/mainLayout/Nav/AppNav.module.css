@@ -1,16 +1,32 @@
+.app-nav {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--primary);
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+}
+
 .app-nav ul {
   display: flex;
   justify-content: space-around;
-
-}
-
-.app-nav {
-  background-color: var(--primary);
-  position: absolute;
-  bottom: 0;
-}
-
-.app-nav ul li {
+  margin: 0;
+  padding: 0;
   list-style: none;
-  padding: 1rem;
+}
+
+.app-nav li {
+  font-size: 1rem;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  transition: text-shadow 0.2s ease;
+}
+
+.app-nav a:hover {
+  text-shadow: 1px 1px 2px #83673c;
+  transition: text-shadow 0.2s ease;
 }
