@@ -9,7 +9,7 @@ const AppFooter: React.FC = () => {
           © {new Date().getFullYear()} Hospital Bicis. All rights reserved.
         </p>
         <p className={styles.text}>
-          Designed and developed with ❤️ by Cristina Díaz Cabello and Darío Peregrín Alconchel.
+          by Cristina Díaz Cabello and Darío Peregrín Alconchel.
         </p>
       </div>
     </footer>

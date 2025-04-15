@@ -10,11 +10,11 @@ const AppHeader: React.FC = () => {
         <Image
           src="/logo.png"
           alt="Logo Bicis Hlanz"
-          width={30}
-          height={30}
+          width={20}
+          height={20}
           className={styles["logo"]}
         />
-        <h1>Bicis Hlanz</h1>
+        <h3>Bicis Hlanz</h3>
       </Link>
     </header>
   );

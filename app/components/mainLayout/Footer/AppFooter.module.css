@@ -1,19 +1,12 @@
 .footer {
-    background-color: var(--footer-background, #1e1e2f); /* Default fallback */
-    color: var(--footer-text-color, #ffffff); /* Default fallback */
-    padding: 1.5rem 0;
-    text-align: center;
-    border-top: 1px solid var(--footer-border-color, #333);
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .text {
-    font-size: 0.875rem;
-    margin: 0.5rem 0;
-    color: var(--footer-text-color, #cccccc); /* Default fallback */
-  }
+  background-color: var(--footer-background, var(--accent));
+  color: var(--footer-text-color, #ffffff);
+  padding: 1% 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+.text {
+  font-size: 0.875rem;
+  color: var(--footer-text-color, #cccccc90);
+}
