@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import styles from "./LoginForm.module.css";
-import { account, ID } from "../../appwrite.js";
+import { account } from "../../appwrite.js";
+import Link from "next/link";
+import { AppwriteException } from "appwrite";
 
 interface User {
   name: string;
@@ -13,7 +15,6 @@ const LoginForm: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
 
   // Check if the user is already logged in
   React.useEffect(() => {
@@ -21,12 +22,12 @@ const LoginForm: React.FC = () => {
       try {
         const user = await account.get();
         setLoggedInUser(user as User);
-      } catch (error: any) {
-        if (error.code === 401) {
-          // User is not logged in, this is expected
+      } catch (error) {
+        if (error instanceof AppwriteException && error.code === 401) {
+          // User is not logged in
           setLoggedInUser(null);
         } else {
-          console.error("Unexpected error fetching user session:", error);
+          console.error("Error checking session:", error);
         }
       }
     };
@@ -34,17 +35,12 @@ const LoginForm: React.FC = () => {
     checkSession();
   }, []);
 
-  const iniciarSesion = async (email: string, password: string): Promise<void> => {
-    const session = await account.createEmailPasswordSession(email, password);
+  const logIn = async (email: string, password: string): Promise<void> => {
+    await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get() as User);
   };
 
-  const registrar = async (): Promise<void> => {
-    await account.create(ID.unique(), email, password, name);
-    await iniciarSesion(email, password);
-  };
-
-  const cerrarSesion = async (): Promise<void> => {
+  const logOut = async (): Promise<void> => {
     await account.deleteSession("current");
     setLoggedInUser(null);
   };
@@ -53,7 +49,7 @@ const LoginForm: React.FC = () => {
     return (
       <div>
         <p>Sesión iniciada como {loggedInUser.name}</p>
-        <button type="button" onClick={cerrarSesion}>
+        <button type="button" onClick={logOut}>
           Cerrar sesión
         </button>
       </div>
@@ -77,21 +73,14 @@ const LoginForm: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
         className={styles["email-input"]}
       />
-      <input
-        type="text"
-        placeholder="Nombre"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className={styles["email-input"]}
-      />
-      <button type="button" onClick={() => iniciarSesion(email, password)}>
+      <button type="button" onClick={() => logIn(email, password)}>
         Iniciar Sesión
       </button>
       <p className={styles["register-link"]}>
-        ¿No tienes cuenta aún?{" "}
-        <a href="./registo" onClick={registrar}>
+        ¿No tienes cuenta aún?
+        <Link href="/registo">
           Regístrate
-        </a>
+        </Link>
       </p>
     </form>
   );
