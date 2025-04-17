@@ -74,7 +74,7 @@ const LoginForm: React.FC = () => {
       </button>
       <p className={styles["register-link"]}>
         ¿No tienes cuenta aún?
-        <Link href="/registo">
+        <Link href="/registro">
           Regístrate
         </Link>
       </p>
