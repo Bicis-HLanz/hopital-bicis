@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./LoginForm.module.css";
 import { account } from "../../appwrite.js";
 import Link from "next/link";
@@ -16,6 +17,8 @@ const LoginForm: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const router = useRouter();
 
   // Check if the user is already logged in
   React.useEffect(() => {
@@ -39,6 +42,9 @@ const LoginForm: React.FC = () => {
   const logIn = async (email: string, password: string): Promise<void> => {
     await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get() as User);
+    
+    //navigate to the home page
+    router.push("/reservar");
   };
 
   const logOut = async (): Promise<void> => {

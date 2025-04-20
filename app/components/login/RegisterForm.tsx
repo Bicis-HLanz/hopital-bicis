@@ -5,6 +5,7 @@ import styles from "./LoginForm.module.css";
 import { account, ID } from "../../appwrite.js";
 import { AppwriteException } from "appwrite";
 import LogoutForm from "./LogoutForm";
+import { useRouter } from "next/navigation";
 
 interface User {
   name: string;
@@ -17,6 +18,8 @@ const RegisterForm: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
+
+    const router = useRouter();
 
   // Check if the user is already logged in
   React.useEffect(() => {
@@ -49,6 +52,9 @@ const RegisterForm: React.FC = () => {
   const login = async (email: string, password: string): Promise<void> => {
     await account.createEmailPasswordSession(email, password);
     setLoggedInUser(await account.get());
+
+    // Navigate to the home page
+    router.push("/reservar");
   };
 
   const logOut = async (): Promise<void> => {
