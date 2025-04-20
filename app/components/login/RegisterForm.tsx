@@ -70,7 +70,7 @@ const RegisterForm: React.FC = () => {
 
   return (
     <form className={styles["login-form"]}>
-      <h1>Iniciar Sesión</h1>
+      <h1>Regístrate</h1>
       <input
         type="email"
         placeholder="Correo electrónico"
