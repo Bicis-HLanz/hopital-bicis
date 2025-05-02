@@ -1,6 +1,6 @@
 'use client';
 
-import TarjetaBici from '@/components/tarjetaBici/TarjetaBici';
+import TarjetaBici from '@/components/tarjetaBici/BicisList';
 
 const ReservarPage = () => {
   return (
