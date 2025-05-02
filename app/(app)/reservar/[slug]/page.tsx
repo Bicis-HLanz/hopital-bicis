@@ -15,12 +15,12 @@ export default async function BiciDetails({ params }: Props) {
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
   const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
 
-  let docs;
+  let doc;
   try {
-    docs = await databases.listDocuments(
+    doc = await databases.getDocument(
       databaseId,
       collectionId,
-      [Query.equal("name", slug)]
+      slug
     );
   } catch (error) {
     console.error("Error fetching bicycle details:", error);
@@ -32,8 +32,6 @@ export default async function BiciDetails({ params }: Props) {
       </div>
     );
   }
-
-  const doc = docs.documents[0];
 
   if (!doc) {
     return <div>Bicicleta no encontrada</div>;
