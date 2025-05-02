@@ -1,5 +1,5 @@
 import { Query } from "appwrite";
-import { databases } from "../../../appwrite";
+import { databases } from "@/appwriteServer";
 import Image from "next/image";
 
 // Define the page props to get the params from the dynamic route
