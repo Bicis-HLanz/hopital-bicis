@@ -1,27 +1,15 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Models } from "appwrite";
-import { Client, Databases } from "appwrite";
+import { Databases } from "appwrite";
+import { client } from "@/appwrite";
+import Link from "next/link";
 
 const TarjetaBici: React.FC = () => {
   const [documents, setDocuments] = useState<Models.Document[]>([]);
-  const client = useMemo(() => {
-    const appwriteClient = new Client();
-    appwriteClient
-      .setEndpoint(
-        process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT ||
-          "https://cloud.appwrite.io/v1"
-      )
-      .setProject(
-        process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || "default_project_id"
-      );
-    return appwriteClient;
-  }, []);
 
-  const databaseId =
-    process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "default_database_id";
-  const collectionId =
-    process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "default_collection_id";
+  const databaseId =  process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -38,26 +26,23 @@ const TarjetaBici: React.FC = () => {
     };
 
     fetchDocuments();
-  }, [client, databaseId, collectionId]);
+  }, [databaseId, collectionId]);
 
   return (
     <ul>
-      <li className="tarjetaBici">
-        <div className="tarjetaBici__container">
-          {documents.map((doc) => (
-            <div key={doc.$id} className="tarjetaBici__item">
-              <Image
-                src={doc["image-url"]}
-                alt={doc.name}
-                style={{ maxWidth: "200px" }}
-                width={200}
-                height={200}
-              />
-              <h2 className="tarjetaBici__name">{doc.name}</h2>
-            </div>
-          ))}
-        </div>
-      </li>
+      {documents.map((doc) => (
+        <li key={doc.$id}>
+          <Link href={`reservar/${doc.$id}`}>
+            <Image
+              src={doc["image-url"]}
+              alt={doc.name}
+              width={200}
+              height={200}
+            />
+            <h2>{doc.name}</h2>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };
