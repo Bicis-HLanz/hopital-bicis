@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Models } from "appwrite";
-import { Databases } from "appwrite";
-import { client } from "@/appwrite";
+import { databases } from "@/appwrite";
 import BiciCard from "./BiciCard";
 
 const BicisList: React.FC = () => {
@@ -13,7 +12,6 @@ const BicisList: React.FC = () => {
 
   useEffect(() => {
     const fetchDocuments = async () => {
-      const databases = new Databases(client);
       try {
         const response = await databases.listDocuments(
           databaseId,
