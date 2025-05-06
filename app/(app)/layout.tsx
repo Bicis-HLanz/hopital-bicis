@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AppHeader from "@/components/mainLayout/Header/AppHeader";
 import AppNav from "@/components/mainLayout/Nav/AppNav";
+import styles from "./layout.module.css"; // Create this CSS module
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className={styles.layoutContainer}>
       <AppHeader />
-      <main>{children}</main>
+      <main className={styles.mainContent}>{children}</main>
       <AppNav />
-    </>
+    </div>
   );
 }

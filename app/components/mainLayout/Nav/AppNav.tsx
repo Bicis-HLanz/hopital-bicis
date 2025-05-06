@@ -7,10 +7,10 @@ const AppNav: React.FC = () => {
     <nav className={styles["app-nav"]}>
       <ul>
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/">Inicio</Link>
         </li>
         <li>
-          <Link href="/reserva">Reserva</Link>
+          <Link href="/reserva">Tus Reservas</Link>
         </li>
       </ul>
     </nav>

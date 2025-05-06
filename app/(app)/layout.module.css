@@ -1,0 +1,48 @@
+.layoutContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  ul{
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+
+.app-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 1rem;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}

@@ -20,15 +20,6 @@ const AppHeader: React.FC = () => {
       </div>
       
       <div className={styles["header-right"]}>
-        <Link href="/documentacion" className={styles["icon-link"]}>
-          <Image
-            src="/infoIcon.png"  
-            alt="Sobre Nosotros"
-            width={35}
-            height={35}
-            className={styles["icon"]}
-          />
-        </Link>
         
         <Link href="/login" className={styles["icon-link"]}>
           <Image
