@@ -10,7 +10,7 @@ const AppNav: React.FC = () => {
           <Link href="/">Inicio</Link>
         </li>
         <li>
-          <Link href="/reserva">Tus Reservas</Link>
+          <Link href="/mi-reserva">Tus Reservas</Link>
         </li>
       </ul>
     </nav>
