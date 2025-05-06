@@ -20,7 +20,7 @@ const AppHeader: React.FC = () => {
       </div>
       
       <div className={styles["header-right"]}>
-        <Link href="/info" className={styles["icon-link"]}>
+        <Link href="/documentacion" className={styles["icon-link"]}>
           <Image
             src="/infoIcon.png"  
             alt="Sobre Nosotros"
@@ -30,7 +30,7 @@ const AppHeader: React.FC = () => {
           />
         </Link>
         
-        <Link href="/profile" className={styles["icon-link"]}>
+        <Link href="/login" className={styles["icon-link"]}>
           <Image
             src="/userIcon.png" 
             alt="Perfil Usuario"
