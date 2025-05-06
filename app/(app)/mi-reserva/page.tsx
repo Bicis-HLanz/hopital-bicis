@@ -1,6 +1,6 @@
 'use client';
 
-import MiReservaTarjeta from '@/components/miReservaTarjeta/miReservaTarjeta';
+import MiReservaTarjeta from '@/components/miReservaTarjeta/MiReservaTarjeta';
 
 const MisReservasPage = () => {
   return (
