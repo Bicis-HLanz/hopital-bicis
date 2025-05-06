@@ -6,16 +6,40 @@ import Image from 'next/image';
 const AppHeader: React.FC = () => {
   return (
     <header className={styles["app-header"]}>
-      <Link href="/">
-        <Image
-          src="/logo.png"
-          alt="Logo Bicis Hlanz"
-          width={20}
-          height={20}
-          className={styles["logo"]}
-        />
-        <h3>Bicis Hlanz</h3>
-      </Link>
+      <div className={styles["header-left"]}>
+        <Link href="/" className={styles["logo-link"]}>
+          <Image
+            src="/logo.png"
+            alt="Logo Bicis Hlanz"
+            width={35}
+            height={35}
+            className={styles["logo"]}
+          />
+          <h2>Hospital Bicis</h2>
+        </Link>
+      </div>
+      
+      <div className={styles["header-right"]}>
+        <Link href="/info" className={styles["icon-link"]}>
+          <Image
+            src="/infoIcon.png"  
+            alt="Sobre Nosotros"
+            width={35}
+            height={35}
+            className={styles["icon"]}
+          />
+        </Link>
+        
+        <Link href="/profile" className={styles["icon-link"]}>
+          <Image
+            src="/userIcon.png" 
+            alt="Perfil Usuario"
+            width={35}
+            height={35}
+            className={styles["icon"]}
+          />
+        </Link>
+      </div>
     </header>
   );
 };
