@@ -8,11 +8,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #eeeeed;
-    --background: #030202;
-    --primary: #b35000;
-    --secondary: #524132;
-    --accent: #78593f;
+    --text: #cfcde4;
+    --background: #0e0807;
+    --primary: #b23b10;
+    --secondary: #673b23;
+    --accent: #884b2b;
   }
 }
 
