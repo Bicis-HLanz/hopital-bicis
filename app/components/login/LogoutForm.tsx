@@ -1,3 +1,5 @@
+import styles from './LogoutForm.module.css';
+
 interface User {
   name: string;
   email: string;
@@ -11,10 +13,14 @@ export default function LogoutForm({
   loggedInUser: User;
 }) {
   return (
-    <form>
-      <h1>Usuario: {loggedInUser.name}</h1>
-      <p>¿Quieres cerrar sesión?</p>
-      <button type="button" onClick={logout}>
+    <form className={styles.container}>
+      <h1 className={styles.title}>Usuario: {loggedInUser.name}</h1>
+      <p className={styles.message}>¿Quieres cerrar sesión?</p>
+      <button 
+        type="button" 
+        onClick={logout}
+        className={styles.button}
+      >
         Cerrar sesión
       </button>
     </form>

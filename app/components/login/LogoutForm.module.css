@@ -1,0 +1,54 @@
+.container {
+    max-width: 90%; 
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--background);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .title {
+    color: var(--text);
+    font-size: clamp(1.5rem, 4vw, 2rem); 
+    margin-bottom: 1rem;
+  }
+  
+  .message {
+    color: var(--text);
+    font-size: clamp(1rem, 3vw, 1.1rem); 
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+  
+  .button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%; 
+    max-width: 200px; 
+  }
+  
+  .button:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 400px;
+      padding: 2rem;
+    }
+    .button {
+      width: auto; 
+    }
+    .button:active {
+        transform: scale(0.95);
+      }
+  }
