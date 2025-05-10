@@ -1,10 +1,11 @@
 'use client';
 
 import TarjetaBici from '@/components/tarjetaBici/BicisList';
+import styles from "./page.module.css";
 
 const ReservarPage = () => {
   return (
-    <div>
+    <div className={styles["grid-container"]}>
       <TarjetaBici></TarjetaBici>
     </div>
   );

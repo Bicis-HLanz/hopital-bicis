@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Models } from "appwrite";
 import { databases } from "@/appwrite";
 import BiciCard from "./BiciCard";
+import styles from "./BiciList.module.css";
 
 const BicisList: React.FC = () => {
   const [documents, setDocuments] = useState<Models.Document[]>([]);
@@ -27,9 +28,9 @@ const BicisList: React.FC = () => {
   }, [databaseId, collectionId]);
 
   return (
-    <ul>
+    <ul className={styles["bici-card"]}>
       {documents.map((doc) => (
-        <li key={doc.$id}>
+        <li key={doc.$id} className={styles["bici-card-item"]}>
           <BiciCard doc={doc} />
         </li>
       ))}
