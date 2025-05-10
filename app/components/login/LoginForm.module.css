@@ -3,14 +3,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem;
-  background-color: var(--background); 
-  border-radius: 12px;
+  padding: 0 2.5rem;
+  background-color: var(--background-light);
+  border-radius: 8px;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
+  margin: 0 auto;
   width: 100%;
   max-width: 420px;
-  min-height: 400px;
+  min-height: 380px;
 }
 
 .login-form h1 {
@@ -96,7 +96,7 @@
 }
 
 .register-link a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 1px;
@@ -121,21 +121,22 @@
 
 @media (max-width: 768px) {
   .login-form {
-    padding: 2rem 1.5rem;
-    margin: 0 auto;
+    padding: 0rem 1.5rem;
+    margin: 2.5rem auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 310px;
   }
-  
+
   .login-form h1 {
     font-size: 1.5rem;
     margin-bottom: 1.2rem;
   }
-  
+
   .email-input {
     padding: 0.8rem;
   }
-  
+
   .login-form button {
     padding-top: 0.9rem;
   }
@@ -145,11 +146,11 @@
   .login-form {
     width: 90%;
   }
-  
+
   .login-form h1 {
     font-size: 1.5rem;
   }
-  
+
   .register-link {
     font-size: 0.9rem;
   }

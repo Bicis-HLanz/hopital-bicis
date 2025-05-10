@@ -1,6 +1,7 @@
 :root {
   --text: #2b1c0e;
   --background: #f7f0e7;
+  --background-light: #f8f5f0;
   --primary: #ffb669;
   --secondary: #f1c391;
   --accent: #faa040;
@@ -16,6 +17,7 @@
   :root {
     --text: #f1e2d5;
     --background: #171008;
+    --background-light: #140e08;
     --primary: #944c00;
     --secondary: #82490d;
     --accent: #bd6405;
@@ -29,14 +31,14 @@
 }
 
 ::selection {
-  background-color: var(--secondary); 
+  background-color: var(--secondary);
   color: var(--background);
 }
 
 html,
 body {
   width: 100%;
-  min-height: 100vh;;
+  min-height: 100vh;
   color: var(--text);
   background: var(--background);
 }
@@ -86,7 +88,7 @@ button:hover {
   }
 
   ::selection {
-  background-color: var(--secondary);
-  color: var(--background); 
-}
+    background-color: var(--secondary);
+    color: var(--background);
+  }
 }
