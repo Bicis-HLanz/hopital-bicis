@@ -1,5 +1,6 @@
 import { databases } from "@/appwriteServer";
 import Image from "next/image";
+import styles from "./page.module.css";
 
 // Define the page props to get the params from the dynamic route
 type Props = {
@@ -22,37 +23,24 @@ export default async function BiciDetails({ params }: Props) {
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <Image
-            src={doc["image-url"]}
-            alt={doc.name}
-            width={400}
-            height={400}
-          />
-        </div>
-        <div>
-          <h1>{doc.name}</h1>
-          {doc.description && <p>{doc.description}</p>}
-          <div>
-            <p>
-              <strong>Estado:</strong> {doc.status}
-            </p>
-            {doc.type && (
-              <p>
-                <strong>Tipo:</strong> {doc.type}
-              </p>
-            )}
-            {doc.location && (
-              <p>
-                <strong>Ubicación:</strong> {doc.location}
-              </p>
-            )}
-          </div>
+    <div className={styles["reservar-grid"]}>
+      <Image src={doc["image-url"]} alt={doc.name} width={400} height={400} />
 
-          <button>Reservar esta bicicleta</button>
+      <div className="details">
+        <h1>{doc.name}</h1>
+        {doc.description && <p>{doc.description}</p>}
+      </div>
+
+      <div className={styles["fcol"]}>
+        <div>
+          <label htmlFor="from">from:</label>
+          <input type="datetime-local" id="from" name="from"></input>
         </div>
+        <div>
+          <label htmlFor="to">to:</label>
+          <input type="datetime-local" id="to" name="to"></input>
+        </div>
+        <button type="button">Reservar</button>
       </div>
     </div>
   );
