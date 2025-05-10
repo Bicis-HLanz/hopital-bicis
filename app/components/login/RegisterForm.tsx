@@ -6,6 +6,7 @@ import { account } from "@/appwrite.js";
 import { AppwriteException, ID } from "appwrite";
 import LogoutForm from "./LogoutForm";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface User {
   name: string;
@@ -102,6 +103,12 @@ const RegisterForm: React.FC = () => {
       <button type="button" onClick={() => register()}>
         Registrarse
       </button>
+      <p className={styles["register-link"]}>
+        ¿Ya tienes cuenta?&nbsp;
+        <Link href="/login">
+          Inicia Sesión
+        </Link>
+      </p>
     </form>
   );
 };
