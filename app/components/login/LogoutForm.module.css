@@ -4,51 +4,104 @@
     padding: 1.5rem;
     background-color: var(--background);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px var(--text-50);
     text-align: center;
-  }
-  
-  .title {
     color: var(--text);
-    font-size: clamp(1.5rem, 4vw, 2rem); 
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-50); 
+}
+  
+.title {
+    color: var(--primary);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: 1rem;
-  }
+    font-weight: 700;
+    text-shadow: 0 2px 4px var(--primary-50); 
+}
   
-  .message {
+.message {
     color: var(--text);
-    font-size: clamp(1rem, 3vw, 1.1rem); 
+    font-size: clamp(1rem, 3vw, 1.1rem);
     margin-bottom: 1.5rem;
     opacity: 0.9;
-  }
+    line-height: 1.6;
+}
   
-  .button {
+.button {
     background-color: var(--primary);
-    color: white;
+    color: var(--text);
     border: none;
     padding: 0.8rem 1.5rem;
     font-size: clamp(0.9rem, 3vw, 1rem);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%; 
-    max-width: 200px; 
-  }
-  
-  .button:hover {
+    width: 100%;
+    max-width: 200px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px var(--text-50);
+}
+
+.button:hover {
     background-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (min-width: 768px) {
+    box-shadow: 0 4px 8px var(--text-50);
+}
+
+.button-alt {
+    background-color: var(--secondary);
+    color: var(--text);
+}
+
+.button-alt:hover {
+    background-color: var(--secondary-50);
+    color: var(--text);
+}
+
+@media (min-width: 768px) {
     .container {
-      max-width: 400px;
-      padding: 2rem;
+        max-width: 400px;
+        padding: 2rem;
     }
     .button {
-      width: auto; 
+        width: auto;
     }
     .button:active {
         transform: scale(0.95);
-      }
-  }
+    }
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: var(--background);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        border-color: var(--accent-50);
+    }
+
+    .title {
+        color: var(--primary);
+        text-shadow: 0 2px 4px var(--primary-50);
+    }
+
+    .message {
+        color: var(--text);
+    }
+
+    .button {
+        color: var(--text);
+    }
+
+    .button:hover {
+        background-color: var(--accent);
+    }
+
+    .button-alt {
+        background-color: var(--secondary);
+        color: var(--text);
+    }
+
+    .button-alt:hover {
+        background-color: var(--secondary-50);
+    }
+}
