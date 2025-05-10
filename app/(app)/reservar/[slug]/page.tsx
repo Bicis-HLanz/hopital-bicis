@@ -1,15 +1,14 @@
 import { databases } from "@/appwriteServer";
 import Image from "next/image";
 import styles from "./page.module.css";
+import ReservarForm from "@/components/reservarForm/ReservarForm";
 
-// Define the page props to get the params from the dynamic route
 type Props = {
   params: {
     slug: string;
   };
 };
 
-// This is a Server Component that will fetch and display the bicycle details
 export default async function BiciDetails({ params }: Props) {
   const { slug } = await params;
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
@@ -31,17 +30,7 @@ export default async function BiciDetails({ params }: Props) {
         {doc.description && <p>{doc.description}</p>}
       </div>
 
-      <div className={styles["fcol"]}>
-        <div>
-          <label htmlFor="from">from:</label>
-          <input type="datetime-local" id="from" name="from"></input>
-        </div>
-        <div>
-          <label htmlFor="to">to:</label>
-          <input type="datetime-local" id="to" name="to"></input>
-        </div>
-        <button type="button">Reservar</button>
-      </div>
+      <ReservarForm bicycle={doc} />
     </div>
   );
 }

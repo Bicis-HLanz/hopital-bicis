@@ -17,20 +17,3 @@
   object-position: center;
   border-radius: 8px;
 }
-
-
-.fcol{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.frow{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
