@@ -23,11 +23,13 @@ export default async function BiciDetails({ params }: Props) {
 
   return (
     <div className={styles["reservar-grid"]}>
-      <Image src={doc["image-url"]} alt={doc.name} width={400} height={400} />
+      <div className={styles["details"]}>
+        <Image src={doc["image-url"]} alt={doc.name} width={400} height={400} />
 
-      <div className="details">
-        <h1>{doc.name}</h1>
-        {doc.description && <p>{doc.description}</p>}
+        <div className="details">
+          <h1>{doc.name}</h1>
+          {doc.description && <p>{doc.description}</p>}
+        </div>
       </div>
 
       <ReservarForm bicycle={doc} />
