@@ -3,7 +3,12 @@ import Image from "next/image";
 import { Models } from "appwrite";
 import styles from "./BiciCard.module.css";
 
-export default function BiciCard({ doc }: { doc: Models.Document }) {
+interface BiciCardProps {
+  doc: Models.Document;
+  showDescription?: boolean;
+}
+
+export default function BiciCard({ doc}: BiciCardProps) {
   return (
     <Link href={`reservar/${doc.$id}`} className={styles.card}>
       <div className={styles.imageContainer}>
@@ -21,11 +26,6 @@ export default function BiciCard({ doc }: { doc: Models.Document }) {
       
       <div className={styles.content}>
         <h2 className={styles.title}>{doc.name}</h2>
-        
-        <button className={styles.reserveButton}>
-          Reservar ahora
-          <span className={styles.arrow}>→</span>
-        </button>
       </div>
     </Link>
   );
