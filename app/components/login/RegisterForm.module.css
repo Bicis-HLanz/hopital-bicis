@@ -1,0 +1,157 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2.5rem;
+  background-color: var(--background-light);
+  border-radius: 8px;
+  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 420px;
+  min-height: 380px;
+}
+
+.login-form h1 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.email-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--text);
+  background-color: var(--background);
+  transition: all 0.3s ease;
+}
+
+.email-input::placeholder {
+  color: var(--secondary);
+  opacity: 0.8;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 158, 79, 0.2);
+}
+
+.login-form button {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--background);
+  background-color: var(--primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-form button:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.login-form button:active {
+  transform: translateY(0);
+}
+
+.register-link {
+  color: var(--secondary);
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.register-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.register-link a:hover {
+  color: var(--accent);
+}
+
+.register-link a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.register-link a:hover::after {
+  transform: scaleX(1);
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.5rem 1.5rem;
+    margin: 2.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 310px;
+  }
+
+  .login-form h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .email-input {
+    padding: 0.8rem;
+  }
+
+  .login-form button {
+    padding-top: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    width: 90%;
+  }
+
+  .login-form h1 {
+    font-size: 1.5rem;
+  }
+
+  .register-link {
+    font-size: 0.9rem;
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./LoginForm.module.css";
+import styles from "./RegisterForm.module.css";
 import { account } from "@/appwrite.js";
 import { AppwriteException, ID } from "appwrite";
 import LogoutForm from "./LogoutForm";
