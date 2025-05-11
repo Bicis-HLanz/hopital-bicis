@@ -7,7 +7,7 @@ const AppNav: React.FC = () => {
     <nav className={styles["app-nav"]}>
       <ul>
         <li>
-          <Link href="/">Inicio</Link>
+          <Link href="/reservar">Inicio</Link>
         </li>
         <li>
           <Link href="/mi-reserva">Tus Reservas</Link>
