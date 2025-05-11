@@ -3,6 +3,20 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
 
+export const revalidate = 600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
+
+  const documents = await databases.listDocuments(databaseId, collectionId);
+
+  return documents.documents.map((doc) => ({
+    slug: doc.$id,
+  }));
+}
+
 type Props = {
   params: Promise<{
     slug: string;
