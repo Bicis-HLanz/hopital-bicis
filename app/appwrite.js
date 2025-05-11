@@ -1,4 +1,4 @@
-import { Client, Account, Databases, ID } from "appwrite";
+import { Client, Account, Databases, ID, Query } from "appwrite";
 
 export const client = new Client();
 
@@ -36,6 +36,21 @@ export async function createReserva(from, to, bicycleId) {
     return response;
   } catch (error) {
     console.error("Error creating reservation:", error);
+    throw error;
+  }
+}
+
+export async function getMyReservations() {
+  try {
+    const userID = (await account.get()).$id;
+    const response = await databases.listDocuments(
+      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID,
+      [Query.equal("userId", userID)]
+    );
+    return response.documents;
+  } catch (error) {
+    console.error("Error fetching reservations:", error);
     throw error;
   }
 }
