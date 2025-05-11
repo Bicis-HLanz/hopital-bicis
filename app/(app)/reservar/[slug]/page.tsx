@@ -4,9 +4,9 @@ import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function BiciDetails({ params }: Props) {
