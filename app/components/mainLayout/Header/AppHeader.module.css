@@ -2,12 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   background-color: var(--primary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 .header-left {
@@ -18,17 +15,10 @@
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
   text-decoration: none;
   color: var(--background);
-}
-
-.logo {
-  transition: transform 0.3s ease;
-}
-
-.logo-link:hover .logo {
-  transform: scale(1.05);
 }
 
 .title {
@@ -59,7 +49,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   margin: 2% 0;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .icon {
