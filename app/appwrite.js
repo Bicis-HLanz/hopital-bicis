@@ -11,6 +11,16 @@ export const databases = new Databases(client);
 
 
 export async function createReserva(from, to, bicycleId) {
+  if (Date.parse(from) > Date.parse(to)) {
+    throw new Error("La fecha de inicio no puede ser mayor a la fecha de fin");
+  }
+  if (Date.parse(from) < Date.now()) {
+    throw new Error("La fecha de inicio no puede ser menor a la fecha actual");
+  }
+  if (Date.parse(to) < Date.now()) {
+    throw new Error("La fecha de fin no puede ser menor a la fecha actual");
+  }
+
   try {
     const userID = (await account.get()).$id;
 

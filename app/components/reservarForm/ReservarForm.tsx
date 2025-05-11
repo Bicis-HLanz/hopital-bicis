@@ -8,13 +8,18 @@ import { Models } from "appwrite";
 export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [error, setError] = useState("");
 
   const reservar = async (): Promise<void> => {
     try {
       const response = await createReserva(from, to, bicycle.$id);
       console.log("Reservation created successfully:", response);
     } catch (error) {
-      console.error("Error creating reservation:", error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
   };
 
@@ -40,6 +45,7 @@ export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) 
           onChange={(e) => setTo(e.target.value)}
         ></input>
       </div>
+      {error && <p className={styles["error"]}>{error}</p>}
       <button type="button" onClick={reservar}>Reservar</button>
     </form>
   );
