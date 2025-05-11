@@ -12,8 +12,9 @@ export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) 
 
   const reservar = async (): Promise<void> => {
     try {
-      const response = await createReserva(from, to, bicycle.$id);
-      console.log("Reservation created successfully:", response);
+      await createReserva(from, to, bicycle.$id);
+      setError("");
+      
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

@@ -11,6 +11,9 @@ export const databases = new Databases(client);
 
 
 export async function createReserva(from, to, bicycleId) {
+  if (!from || !to) {
+    throw new Error("Las fechas de inicio y fin son obligatorias");
+  }
   if (Date.parse(from) > Date.parse(to)) {
     throw new Error("La fecha de inicio no puede ser mayor a la fecha de fin");
   }
