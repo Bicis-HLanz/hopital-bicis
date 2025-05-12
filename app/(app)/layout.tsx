@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AppHeader from "@/components/mainLayout/Header/AppHeader";
-import AppNav from "@/components/mainLayout/Nav/AppNav";
 import styles from "./layout.module.css"; // Create this CSS module
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default function RootLayout({
     <div className={styles.layoutContainer}>
       <AppHeader />
       <main className={styles.mainContent}>{children}</main>
-      <AppNav />
     </div>
   );
 }

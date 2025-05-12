@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   background-color: var(--primary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -11,15 +11,20 @@
 .header-left {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .logo-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 0.5rem;
   text-decoration: none;
   color: var(--background);
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.03);
 }
 
 .title {
@@ -29,10 +34,23 @@
   color: var(--background);
 }
 
+.nav-desktop {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  margin-left: 0.5rem;
+  overflow: hidden;
+}
+
+.nav-mobile{
+  display: none;
+}
+
 .header-right {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  margin-left: auto; 
 }
 
 .icon-link {
@@ -41,21 +59,18 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  margin: 2% 0;
   transition: all 0.3s ease;
   background-color: transparent;
+  border-radius: 50%;
 }
 
 .icon-link:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  margin: 2% 0;
   transform: scale(1.05);
 }
 
 .icon {
   object-fit: contain;
-  border-radius: 50%;
 }
 
 .mobile-menu {
@@ -141,7 +156,20 @@
     display: none;
   }
   
+  .nav-desktop {
+    display: none;
+  }
+  
   .mobile-menu {
     display: block;
+  }
+  
+  .nav-mobile {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
 }
