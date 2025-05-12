@@ -1,8 +1,9 @@
 .container {
   position: relative;
+  width: calc(100% - 2rem); 
   max-width: 480px;
   margin: 2rem auto;
-  padding: 2.5rem;
+  padding: 1.5rem;
   background-color: var(--background-light);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -16,15 +17,16 @@
 .userProfile {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  gap: 0.75rem; 
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--primary-50);
 }
 
 .avatar, .avatarPlaceholder {
-  width: 64px;
-  height: 64px;
+  width: 56px; 
+  height: 56px; 
+  min-width: 56px;
   border-radius: 50%;
   object-fit: cover;
   background-color: var(--primary);
@@ -32,47 +34,54 @@
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
 .userInfo {
   text-align: left;
+  overflow: hidden; 
 }
 
 .userName {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem; 
   color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .userEmail {
   margin: 0.25rem 0 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-50);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title {
   color: var(--primary);
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 1.3rem; 
+  margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
 .buttonGroup {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   border: none;
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 0.85rem; 
+  font-size: 0.95rem; 
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -81,7 +90,7 @@
 }
 
 .buttonIcon {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .reserveButton {
@@ -106,6 +115,55 @@
   color: var(--text);
 }
 
+@media (min-width: 400px) {
+  .container {
+    padding: 2rem;
+  }
+  
+  .userProfile {
+    gap: 1rem;
+  }
+  
+  .avatar, .avatarPlaceholder {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+  }
+  
+  .userName {
+    font-size: 1.25rem;
+  }
+  
+  .userEmail {
+    font-size: 0.9rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .button {
+    padding: 1rem;
+    font-size: 1rem;
+    gap: 0.75rem;
+  }
+  
+  .buttonIcon {
+    font-size: 1.2rem;
+  }
+  
+  .buttonGroup {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 520px;
+    padding: 2.5rem;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .container {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
@@ -122,16 +180,5 @@
   
   .reserveButton:hover {
     background-color: var(--accent);
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .buttonGroup {
-    flex-direction: column;
   }
 }
