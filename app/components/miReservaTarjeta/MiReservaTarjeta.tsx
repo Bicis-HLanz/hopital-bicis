@@ -5,6 +5,7 @@ import { getMyReservations } from "@/appwrite";
 import styles from './MiReservaTarjeta.module.css';
 import { Models } from "appwrite";
 import { useEffect, useState } from "react";
+import {getBycicleImage} from "@/appwrite";
 
 const MiReservaTarjeta: React.FC = () => {
     const [documents, setDocuments] = useState<Models.Document[]>([]);
@@ -55,7 +56,7 @@ const MiReservaTarjeta: React.FC = () => {
                     <li key={doc.$id} className={styles.card}>
                         <div className={styles.imageContainer}>
                             <Image
-                                src={doc.bicicleta["image-url"]}
+                                src={getBycicleImage(doc.bicicleta)}
                                 alt={doc.bicicleta.name}
                                 width={300}
                                 height={300}
