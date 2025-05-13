@@ -2,15 +2,21 @@ import { Client, Account, Databases, ID, Query, Storage } from "appwrite";
 
 export const client = new Client();
 client
-  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
-  .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID);
+  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT as string)
+  .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID as string);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
+interface Reserva {
+  from: string;
+  to: string;
+  userId: string;
+  bicicleta: string;
+}
 
-export async function createReserva(from, to, bicycleId) {
+export async function createReserva(from: string, to: string, bicycleId: string): Promise<Reserva> {
   if (!from || !to) {
     throw new Error("Las fechas de inicio y fin son obligatorias");
   }
@@ -25,13 +31,14 @@ export async function createReserva(from, to, bicycleId) {
   }
 
   try {
-    const userID = (await account.get()).$id;
+    const user = await account.get();
+    const userID = user.$id;
 
-    const response = await databases.createDocument(
-      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID,
+    const response = await databases.createDocument<Reserva>(
+      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID as string,
       ID.unique(),
-      { "from": from, "to": to , "userId": userID, "bicicleta": bicycleId }
+      { from, to, userId: userID, bicicleta: bicycleId }
     );
     return response;
   } catch (error) {
@@ -40,12 +47,14 @@ export async function createReserva(from, to, bicycleId) {
   }
 }
 
-export async function getMyReservations() {
+export async function getMyReservations(): Promise<Reserva[]> {
   try {
-    const userID = (await account.get()).$id;
-    const response = await databases.listDocuments(
-      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID,
+    const user = await account.get();
+    const userID = user.$id;
+
+    const response = await databases.listDocuments<Reserva>(
+      process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
+      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID as string,
       [Query.equal("userId", userID)]
     );
     return response.documents;
@@ -55,12 +64,10 @@ export async function getMyReservations() {
   }
 }
 
-export function getBycicleImage(doc) {
+export function getBycicleImage(doc: { imageId: string }): string {
   const url = storage.getFilePreview(
-    process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+    process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID as string,
     doc.imageId
   ).href;
-
-  console.log("URL de la imagen:", url);
   return url;
 }

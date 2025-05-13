@@ -2,6 +2,8 @@ import { databases } from "@/appwriteServer";
 import Image from "next/image";
 import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
+import { getBycicleImage } from "@/appwrite";
+import { Bicycle } from "@/models/Bicycle";
 
 export const revalidate = 600;
 export const dynamicParams = true;
@@ -32,7 +34,7 @@ export default async function BiciDetails({ params }: Props) {
 
   let doc;
   try {
-    doc = await databases.getDocument(databaseId, collectionId, slug);
+    doc = await databases.getDocument(databaseId, collectionId, slug) as Bicycle;
   } catch (error) {
     console.error("Error fetching document:", error);
     return <div>Error al cargar los detalles de la bicicleta</div>;
@@ -45,7 +47,7 @@ export default async function BiciDetails({ params }: Props) {
   return (
     <div className={styles["reservar-grid"]}>
       <div className={styles["details"]}>
-        <Image src={doc["image-url"]} alt={doc.name} width={400} height={400} />
+        <Image src={getBycicleImage(doc)} alt={doc.name} width={400} height={400} />
 
         <div className="details">
           <h1>{doc.name}</h1>
