@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { account } from "./appwrite.js";
+import { account } from "@/appwrite";
 import { AppwriteException } from "appwrite";
 import styles from "./page.module.css";
 
