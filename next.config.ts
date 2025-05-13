@@ -5,14 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: 'cloud.appwrite.io',
         port: '',
       },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000'
-      }
     ],
   },
 };

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Models } from "appwrite";
 import styles from "./BiciCard.module.css";
+import {getBycicleImage} from "@/appwrite";
 
 interface BiciCardProps {
   doc: Models.Document;
@@ -13,7 +14,7 @@ export default function BiciCard({ doc}: BiciCardProps) {
     <Link href={`reservar/${doc.$id}`} className={styles.card}>
       <div className={styles.imageContainer}>
         <Image
-          src={doc["image-url"]}
+          src={getBycicleImage(doc)}
           alt={doc.name}
           width={300}
           height={200}

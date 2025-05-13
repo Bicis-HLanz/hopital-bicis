@@ -1,4 +1,4 @@
-import { Client, Account, Databases } from 'node-appwrite';
+import { Client, Account, Databases, Storage } from 'node-appwrite';
 
 export const client = new Client();
 
@@ -11,3 +11,15 @@ client
 
 export const account = new Account(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
+
+
+export function getBycicleImage(imageId) {
+    const url = storage.getFilePreview(
+        process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+        imageId
+    ).href;
+
+    console.log("URL de la imagen:", url);
+    return url;
+}

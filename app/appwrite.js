@@ -1,13 +1,13 @@
-import { Client, Account, Databases, ID, Query } from "appwrite";
+import { Client, Account, Databases, ID, Query, Storage } from "appwrite";
 
 export const client = new Client();
-
 client
   .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
   .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID);
 
 export const account = new Account(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
 
 
 export async function createReserva(from, to, bicycleId) {
@@ -53,4 +53,14 @@ export async function getMyReservations() {
     console.error("Error fetching reservations:", error);
     throw error;
   }
+}
+
+export function getBycicleImage(doc) {
+  const url = storage.getFilePreview(
+    process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+    doc.imageId
+  ).href;
+
+  console.log("URL de la imagen:", url);
+  return url;
 }
