@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./LoginForm.module.css";
-import { account } from "@/appwrite.js";
+import { account } from "@/appwrite";
 import Link from "next/link";
 import { AppwriteException } from "appwrite";
 import LogoutForm from "./LogoutForm";

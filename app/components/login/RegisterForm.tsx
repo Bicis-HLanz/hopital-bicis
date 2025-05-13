@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./RegisterForm.module.css";
-import { account } from "@/appwrite.js";
+import { account } from "@/appwrite";
 import { AppwriteException, ID } from "appwrite";
 import LogoutForm from "./LogoutForm";
 import { useRouter } from "next/navigation";
