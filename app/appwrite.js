@@ -60,7 +60,5 @@ export function getBycicleImage(doc) {
     process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
     doc.imageId
   ).href;
-
-  console.log("URL de la imagen:", url);
   return url;
 }
