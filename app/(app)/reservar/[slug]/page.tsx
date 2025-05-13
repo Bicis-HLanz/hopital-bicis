@@ -29,7 +29,14 @@ export default async function BiciDetails({ params }: Props) {
   const collectionId =
     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
 
-  const doc = await databases.getDocument(databaseId, collectionId, slug);
+
+  let doc;
+  try {
+    doc = await databases.getDocument(databaseId, collectionId, slug);
+  } catch (error) {
+    console.error("Error fetching document:", error);
+    return <div>Error al cargar los detalles de la bicicleta</div>;
+  }
 
   if (!doc) {
     return <div>Bicicleta no encontrada</div>;
