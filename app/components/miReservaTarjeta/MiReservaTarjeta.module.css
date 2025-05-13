@@ -1,7 +1,6 @@
 .container {
   margin: 0 auto;
   max-width: 1400px;
-  padding: 0 3rem;
   opacity: 0;
   transform: translateY(15px);
   animation: fadeInUp 0.5s ease-out forwards;
@@ -76,8 +75,8 @@
 }
 
 .description {
-  margin: 0 0 1rem 0;
-  color: var(--text-80);
+  margin: 0 0 0.1rem 0;
+  color: var(--text);
   font-size: 0.9rem;
   line-height: 1.6;
   flex-grow: 1;
