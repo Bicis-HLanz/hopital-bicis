@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { getMyReservations } from "@/appwrite";
+import { getMyReservations, getBycicleImage } from "@/appwrite";
 import styles from './MiReservaTarjeta.module.css';
 import { Models } from "appwrite";
 import { useEffect, useState } from "react";
-import {getBycicleImage} from "@/appwrite";
 
 const MiReservaTarjeta: React.FC = () => {
     const [documents, setDocuments] = useState<Models.Document[]>([]);

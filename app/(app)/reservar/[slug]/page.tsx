@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
 import { getBycicleImage } from "@/appwrite";
+import { Bicycle } from "@/models/Bicycle";
 
 export const revalidate = 600;
 export const dynamicParams = true;
@@ -33,7 +34,7 @@ export default async function BiciDetails({ params }: Props) {
 
   let doc;
   try {
-    doc = await databases.getDocument(databaseId, collectionId, slug);
+    doc = await databases.getDocument(databaseId, collectionId, slug) as Bicycle;
   } catch (error) {
     console.error("Error fetching document:", error);
     return <div>Error al cargar los detalles de la bicicleta</div>;
