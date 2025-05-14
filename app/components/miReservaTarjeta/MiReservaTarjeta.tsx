@@ -79,7 +79,10 @@ const MiReservaTarjeta: React.FC = () => {
                                 </p>
                             </div>
                             <div className={styles.statusBadge}>
-                                {doc.status === 'active' ? 'Activa' : 'Completada'}
+                                {doc.status === 'reserved' ? 'Reservado' : 
+                                    doc.status === 'started' ? 'En curso' :
+                                    doc.status === 'canceled' ? 'Cancelado' :
+                                    'Otro'}
                             </div>
                         </div>
                     </li>
