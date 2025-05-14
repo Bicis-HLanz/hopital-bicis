@@ -1,4 +1,4 @@
-import { Client, Account, Databases, ID, Query, Storage } from "appwrite";
+import { Client, Account, Databases, ID, Query, Storage, Models } from "appwrite";
 
 export const client = new Client();
 client
@@ -9,11 +9,12 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
-interface Reserva {
+interface Reserva extends Models.Document {
   from: string;
   to: string;
   userId: string;
   bicicleta: string;
+  status: string;
 }
 
 export async function createReserva(from: string, to: string, bicycleId: string): Promise<Reserva> {
@@ -38,7 +39,7 @@ export async function createReserva(from: string, to: string, bicycleId: string)
       process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
       process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID as string,
       ID.unique(),
-      { from, to, userId: userID, bicicleta: bicycleId }
+      { from, to, userId: userID, bicicleta: bicycleId , status: "reserved"}
     );
     return response;
   } catch (error) {
