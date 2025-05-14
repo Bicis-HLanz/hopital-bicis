@@ -94,7 +94,10 @@ const LoginForm: React.FC = () => {
   }
 
   return (
-    <form className={styles["login-form"]}>
+    <form className={styles["login-form"]} onSubmit={(e) => {
+      e.preventDefault();
+      logIn(email, password);
+    }}>
       <h1>Iniciar Sesión</h1>
       <input
         type="email"
@@ -111,7 +114,7 @@ const LoginForm: React.FC = () => {
         className={styles["email-input"]}
       />
       {error && <p className={styles["error-message"]}>{error}</p>}
-      <button type="button" onClick={() => logIn(email, password)}>
+      <button type="submit">
         Iniciar Sesión
       </button>
       <p className={styles["register-link"]}>
