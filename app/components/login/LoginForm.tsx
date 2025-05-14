@@ -17,6 +17,7 @@ const LoginForm: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -40,9 +41,45 @@ const LoginForm: React.FC = () => {
   }, []);
 
   const logIn = async (email: string, password: string): Promise<void> => {
-    await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get() as User);
-    
+    setError(null);
+    if (!email || !password) {
+      setError("Por favor, completa todos los campos.");
+      return;
+    }
+
+    if (!email.includes("@")) {
+      setError("Por favor, introduce un correo electrónico válido.");
+      return;
+    }
+
+    try {
+      await account.createEmailPasswordSession(email, password);
+    } catch (error) {
+      if (error instanceof AppwriteException) {
+        switch (error.type) {
+          case "user_invalid_credentials":
+            setError(
+              "Credenciales inválidas. Por favor, verifica tu correo electrónico y contraseña."
+            );
+            break;
+          case "general_argument_invalid":
+            setError("la contraseña debe tener entre 8 y 255 caracteres");
+            break;
+          case "general_rate_limit_exceeded":
+            setError("Se ha excedido el límite de intentos. Por favor, inténtalo más tarde.");
+            break;
+          default:
+            setError("Error inesperado: " + error.type + " " + error.message + " por favor reporta el error al administrador");
+            break;
+        }
+      } else {
+        setError("Error inesperado: " + error);
+      }
+      return;
+    }
+
+    setLoggedInUser((await account.get()) as User);
+
     //navigate to the home page
     router.push("/reservar");
   };
@@ -53,9 +90,7 @@ const LoginForm: React.FC = () => {
   };
 
   if (loggedInUser) {
-    return (
-      <LogoutForm logout={logOut} loggedInUser={loggedInUser} />
-    );
+    return <LogoutForm logout={logOut} loggedInUser={loggedInUser} />;
   }
 
   return (
@@ -75,14 +110,13 @@ const LoginForm: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
         className={styles["email-input"]}
       />
+      {error && <p className={styles["error-message"]}>{error}</p>}
       <button type="button" onClick={() => logIn(email, password)}>
         Iniciar Sesión
       </button>
       <p className={styles["register-link"]}>
         ¿No tienes cuenta aún?&nbsp;
-        <Link href="/register">
-          Regístrate
-        </Link>
+        <Link href="/register">Regístrate</Link>
       </p>
     </form>
   );
