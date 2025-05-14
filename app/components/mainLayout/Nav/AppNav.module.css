@@ -10,11 +10,10 @@
   border-top: 1px solid var(--border-color);
   z-index: 1000;
 }
-
 .app-nav ul {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
   margin: 0 auto;
   padding: 0;
   list-style: none;
@@ -29,13 +28,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1; /* Ensures all li elements have the same width */
 }
 
-.app-nav li:nth-child(2) {
-  background-color: var(--border-color);
-  height: 60%;
-  align-self: center;
-}
 
 .app-nav a {
   text-decoration: none;
@@ -98,9 +93,6 @@
     height: auto;
   }
 
-  .app-nav li:nth-child(2) {
-    display: none;
-  }
 
   .app-nav a {
     color: var(--text);

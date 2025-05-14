@@ -15,7 +15,6 @@ const AppNav: React.FC = () => {
             Inicio
           </Link>
         </li>
-        <li></li> {/* Separador */}
         <li>
           <Link href="/mi-reserva">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className={styles["icono"]}>
@@ -23,6 +22,16 @@ const AppNav: React.FC = () => {
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
             Tus Reservas
+          </Link>
+        </li>
+        <li>
+          <Link href="/gestionar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className={styles["icono"]}>
+              <path d="M12 2l9 7-3 11H6L3 9l9-7z" />
+              <path d="M12 2v10" />
+              <path d="M3 9l9 7 9-7" />
+            </svg>
+            Admin
           </Link>
         </li>
       </ul>
