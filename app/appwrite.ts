@@ -1,4 +1,5 @@
-import { Client, Account, Databases, ID, Query, Storage, Models } from "appwrite";
+import { Client, Account, Databases, ID, Query, Storage } from "appwrite";
+import Reserva from "./models/Reserva";
 
 export const client = new Client();
 client
@@ -9,13 +10,6 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
-interface Reserva extends Models.Document {
-  from: string;
-  to: string;
-  userId: string;
-  bicicleta: string;
-  status: string;
-}
 
 export async function createReserva(from: string, to: string, bicycleId: string): Promise<Reserva> {
   if (!from || !to) {
