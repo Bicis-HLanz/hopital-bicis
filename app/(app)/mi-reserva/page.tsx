@@ -1,9 +1,10 @@
-import MiReservaTarjeta from '@/components/miReservaTarjeta/MiReservaTarjeta';
+import MiReservaTarjeta from "@/components/miReservaTarjeta/MiReservaTarjeta";
+import styles from "./page.module.css";
 
 const MisReservasPage = () => {
   return (
-    <main>
-      <section>
+    <main className={styles.container}>
+      <section className={styles.children}>
         <MiReservaTarjeta />
       </section>
     </main>
