@@ -1,15 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Models } from "appwrite";
+import { Bicycle } from "@/models/Bicycle";
 import styles from "./BiciCard.module.css";
 import {getBycicleImage} from "@/appwrite";
 
-interface BiciCardProps {
-  doc: Models.Document;
-  showDescription?: boolean;
-}
 
-export default function BiciCard({ doc}: BiciCardProps) {
+export default function BiciCard({ doc }: { doc: Bicycle }) {
   return (
     <Link href={`reservar/${doc.$id}`} className={styles.card}>
       <div className={styles.imageContainer}>
