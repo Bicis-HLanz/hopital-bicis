@@ -2,10 +2,14 @@
 
 import { useState } from "react";
 import styles from "./ReservarForm.module.css";
-import { createReserva} from "@/appwrite";
+import { createReserva } from "@/appwrite";
 import { Models } from "appwrite";
 
-export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) {
+export default function ReservarForm({
+  bicycle,
+}: {
+  bicycle: Models.Document;
+}) {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [error, setError] = useState("");
@@ -14,7 +18,6 @@ export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) 
     try {
       await createReserva(from, to, bicycle.$id);
       setError("");
-      
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -25,29 +28,39 @@ export default function ReservarForm({ bicycle }: { bicycle: Models.Document }) 
   };
 
   return (
-    <form className={styles["form"]}>
-      <div>
-        <label htmlFor="from">from:</label>
+    <form className={styles.form}>
+      <div className={styles.formGroup}>
         <input
+          className={styles.formInput}
           type="datetime-local"
           id="from"
           name="from"
           value={from}
           onChange={(e) => setFrom(e.target.value)}
-        ></input>
+          placeholder=" "
+        />
+        <label className={styles.formLabel} htmlFor="from">
+          Fecha de inicio
+        </label>
       </div>
-      <div>
-        <label htmlFor="to">to:</label>
+      <div className={styles.formGroup}>
         <input
+          className={styles.formInput}
           type="datetime-local"
           id="to"
           name="to"
           value={to}
           onChange={(e) => setTo(e.target.value)}
-        ></input>
+          placeholder=" "
+        />
+        <label className={styles.formLabel} htmlFor="to">
+          Fecha de fin
+        </label>
       </div>
-      {error && <p className={styles["error"]}>{error}</p>}
-      <button type="button" onClick={reservar}>Reservar</button>
+      {error && <p className={styles.errorMessage}>{error}</p>}
+      <button type="button" className={styles.submitButton} onClick={reservar}>
+        Reservar
+      </button>
     </form>
   );
 }

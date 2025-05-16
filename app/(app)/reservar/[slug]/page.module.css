@@ -1,123 +1,107 @@
 .reservar-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  background-color: var(--background-light);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--secondary-50);
+  gap: 1.5rem;
+  border-radius: 8px;
 }
 
 .details img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
-  aspect-ratio: 1/1;
-  transition: transform 0.3s ease;
 }
 
-.details img:hover {
-  transform: scale(1.02);
+.details1 {
+  flex: 1;
 }
 
-.details h1 {
-  color: var(--primary);
-  font-size: 2.2rem;
-  margin: 0 0 1rem 0;
-  position: relative;
+.details1 h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 0.5rem;
 }
 
-.details h1::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background-color: var(--accent);
-}
-
-.details p {
-  color: var(--text);
+.details1 p {
+  font-size: 1rem;
   line-height: 1.6;
-  font-size: 1.1rem;
-  margin: 0;
+  color: var(--text-50);
+  margin-bottom: 1rem;
 }
 
-/* Estilos para el formulario de reserva (asumiendo que está en el otro grid) */
-.reservar-form-container {
-  background-color: var(--background-light);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--secondary-50);
-}
-
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .details, .reservar-form-container {
-    background-color: var(--background);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    border-color: var(--secondary);
-  }
-
-  .details h1 {
-    color: var(--accent);
-  }
-
-  .details h1::after {
-    background-color: var(--primary);
-  }
-
-  .details p {
-    color: var(--text-80);
-  }
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+@media (min-width: 768px) {
   .reservar-grid {
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
   }
-}
-
-@media (max-width: 768px) {
-  .reservar-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
-
+  
   .details {
-    padding: 1.5rem;
+    flex-direction: row;
+    align-items: flex-start;
   }
+  
+  .details img {
+    width: 40%;
+    min-width: 250px;
+    max-height: 300px;
+  }
+}
 
-  .details h1 {
-    font-size: 1.8rem;
+@media (min-width: 1024px) {
+  .reservar-grid {
+    gap: 3rem;
+    padding: 3rem;
+  }
+  
+  .details1 h1 {
+    font-size: 2.2rem;
+  }
+  
+  .details1 p {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .reservar-grid {
+    padding: 1rem;
+  }
+  
   .details {
     padding: 1rem;
   }
-
-  .details h1 {
+  
+  .details1 h1 {
     font-size: 1.5rem;
   }
+}
 
-  .details p {
-    font-size: 1rem;
+@media (prefers-color-scheme: dark) {
+  
+  .details img {
+    border-color: var(--accent);
   }
+  
+  .details1 h1 {
+    border-color: var(--accent);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reservar-grid {
+  animation: fadeIn 0.5s ease-out;
 }

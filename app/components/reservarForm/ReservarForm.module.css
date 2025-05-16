@@ -1,20 +1,112 @@
-.form{
+.form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  gap: 1.8rem;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2.4rem;
+  background-color: transparent;
 }
 
-.error{
-  color: red;
-  font-size: 0.8rem;
+.formGroup {
+  position: relative;
 }
 
-.form input[type="datetime-local"]{
+.formLabel {
+  position: absolute;
+  left: 1rem;
+  top: 0.9rem;
+  color: var(--text-50);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: var(--background);
+  padding: 0 0.4rem;
+}
+
+.formInput {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  display: block;
+  padding: 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.formInput:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 2px 0 0 var(--accent-50);
+}
+
+.formInput:focus + .formLabel,
+.formInput:not(:placeholder-shown) + .formLabel {
+  top: -0.6rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: var(--background-light);
+}
+
+.submitButton {
+  padding: 1rem;
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  margin-top: 0.6rem;
+}
+
+.submitButton:hover {
+  background-color: var(--accent-50);
+  color: var(--text);
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: -1.2rem;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(220, 53, 69, 0.05);
+  border-left: 2px solid #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .form {
+    padding: 1.8rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .formInput {
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  .formLabel {
+    font-size: 0.9rem;
+    top: 0.8rem;
+  }
+  
+  .formInput {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .submitButton {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
 }
