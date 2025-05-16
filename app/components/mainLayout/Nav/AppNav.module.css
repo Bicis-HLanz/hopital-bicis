@@ -4,22 +4,24 @@
   left: 0;
   right: 0;
   background-color: var(--background-light);
-  padding: 0.5rem 0;
+  margin: 0.5rem 0;
   box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-color);
   z-index: 1000;
 }
+
 .app-nav ul {
   display: flex;
   flex-grow: 1;
   justify-content: space-evenly;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 1rem; 
   list-style: none;
-  max-width: 600px;
+  max-width: 100%; 
   width: 100%;
-  height: 56px;
+  height: auto; 
+  flex-wrap: wrap; 
 }
 
 .app-nav li {
@@ -28,25 +30,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1; /* Ensures all li elements have the same width */
+  flex: 1 1 auto; 
+  min-width: 60px;
+  padding: 0.5rem 0.3rem; 
 }
-
 
 .app-nav a {
   text-decoration: none;
   color: var(--text);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
+  font-size: 0.85rem; 
   font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  width: 100%;
-  height: 100%;
   transition: all 0.4s ease;
   position: relative;
+  width: 100%;
+  text-align: center; 
+  word-break: break-word;
+  white-space: normal; 
+  line-height: 1.2;
 }
 
 .app-nav a::before {
@@ -69,7 +73,8 @@
 .app-nav a svg {
   width: 20px;
   height: 20px;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem; 
+  flex-shrink: 0; 
 }
 
 @media (min-width: 769px) {
@@ -85,14 +90,20 @@
 
   .app-nav ul {
     display: flex;
-    grid-template-columns: none;
     justify-content: flex-start;
     gap: 1.5rem;
     margin-left: 1.5rem;
     max-width: none;
     height: auto;
+    padding: 0;
+    flex-wrap: nowrap;
   }
 
+  .app-nav li {
+    min-width: auto;
+    flex: 0 1 auto; 
+    padding: 0;
+  }
 
   .app-nav a {
     color: var(--text);
@@ -102,6 +113,7 @@
     gap: 0.5rem;
     width: auto;
     border-radius: 8px;
+    white-space: nowrap;
   }
 
   .app-nav a::before {
