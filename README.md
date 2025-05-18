@@ -24,4 +24,3 @@ La app permite:
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React Router](https://reactrouter.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
