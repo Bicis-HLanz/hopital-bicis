@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Storage } from 'node-appwrite';
+import { Client, Account, Databases, Storage, Users } from 'node-appwrite';
 
 export const client = new Client();
 
@@ -12,6 +12,7 @@ client
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
+export const users = new Users(client);
 
 
 export function getBycicleImage(imageId) {

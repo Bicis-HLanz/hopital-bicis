@@ -1,10 +1,22 @@
-export default function Page() {
+import { users } from "@/appwriteServer";
+
+
+// Revalida cada 60 segundos (ISR)
+export const revalidate = 60
+
+export default async function Page() {
+  const usersListResponse = await users.list()
+  const usersList = usersListResponse.users
+
   return (
-    <main>
-      <section>
-        <h1>Gestión de Bicicletas</h1>
-        <p>En esta sección podrás gestionar las bicicletas disponibles.</p>
-      </section>
-    </main>
-  );
+    <>
+      <h1>Users</h1>
+      {usersList.map((user) => (
+        <article key={user.$id}>
+          <h2>{user.name}</h2>
+          <p>Email: {user.email}</p>
+        </article>
+      ))}
+    </>
+  )
 }
