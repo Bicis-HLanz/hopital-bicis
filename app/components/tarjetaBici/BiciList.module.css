@@ -6,3 +6,9 @@
     align-items: center;
     gap: 2rem;
 }
+
+@media (max-width: 768px) {
+  .bici-card{
+    margin: 3rem 0;
+  }
+}
