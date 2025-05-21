@@ -1,5 +1,7 @@
 import { users } from "@/appwriteServer";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const usersListResponse = await users.list()
   const usersList = usersListResponse.users
