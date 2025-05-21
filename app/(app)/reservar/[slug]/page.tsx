@@ -6,48 +6,51 @@ import { getBycicleImage } from "@/appwrite";
 import { Bicycle } from "@/models/Bicycle";
 
 export const revalidate = 600;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
-
-  const documents = await databases.listDocuments(databaseId, collectionId);
-
-  return documents.documents.map((doc) => ({
-    slug: doc.$id,
-  }));
-}
-
-type Props = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-export default async function BiciDetails({ params }: Props) {
-  const { slug } = await params;
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
   const collectionId =
     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
 
+  const docList: { documents: Bicycle[] } = await databases.listDocuments(
+    databaseId,
+    collectionId
+  );
 
-  let doc;
-  try {
-    doc = await databases.getDocument(databaseId, collectionId, slug) as Bicycle;
-  } catch (error) {
-    console.error("Error fetching document:", error);
-    return <div>Error al cargar los detalles de la bicicleta</div>;
+  return docList.documents.map((doc) => ({
+    slug: doc.$id,
+  }));
+}
+
+export default async function BiciDetails({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID;
+
+  if (!databaseId || !collectionId) {
+    throw new Error("Database ID or Collection ID is not set");
   }
 
-  if (!doc) {
-    return <div>Bicicleta no encontrada</div>;
-  }
+  const doc : Bicycle = await databases.getDocument(
+    databaseId,
+    collectionId,
+    slug
+  );
 
   return (
     <div className={styles["reservar-grid"]}>
       <div className={styles["details"]}>
-        <Image src={getBycicleImage(doc)} alt={doc.name} width={150} height={150} />
+        <Image
+          src={getBycicleImage(doc)}
+          alt={doc.name}
+          width={150}
+          height={150}
+        />
 
         <div className={styles["details1"]}>
           <h1>{doc.name}</h1>
