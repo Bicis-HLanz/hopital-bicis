@@ -23,9 +23,8 @@
 
 .card {
   display: flex;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   background-color: var(--background-light);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--border-color);
   padding: 0;
@@ -34,10 +33,6 @@
   min-height: 280px; 
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0px 5px var(--primary-50);
-}
 
 .imageContainer {
   flex: 0 0 35%;
@@ -365,5 +360,39 @@
 
   .date {
     font-size: 0.75rem;
+  }
+}
+.cancelButton {
+  background-color: var(--primary);
+  color: var(--background-light);
+  border-radius: 0 0 8px 8px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.cancelButton:hover {
+  background-color: var(--accent);
+}
+
+.cancelButton:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .cancelButton {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cancelButton {
+    padding: 0.7rem;
+    font-size: 0.8rem;
+    max-width: 100%;
   }
 }
