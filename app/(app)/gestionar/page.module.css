@@ -4,10 +4,24 @@
   align-items: center;
 }
 
+.imageWrapper {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 1rem;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px 8px 0 0;
+}
+
 .section {
   width: 100%;
   max-width: 800px;
-  border-radius: 12px;
 }
 
 .section h1 {
@@ -59,7 +73,7 @@
 }
 
 .link:hover, .link:focus {
-  background: var(--primary);
+  background: var(--secondary);
   color: var(--background);
   transform: translateY(-3px);
   box-shadow: 0 4px 12px var(--primary-50);
@@ -69,10 +83,6 @@
 @media (min-width: 768px) {
   .ul {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .section {
-    padding: 3rem;
   }
   
   .section h1 {
@@ -87,9 +97,6 @@
 }
 
 @media (min-width: 1024px) {
-  .section {
-    padding: 4rem;
-  }
   
   .link {
     font-size: 1.4rem;

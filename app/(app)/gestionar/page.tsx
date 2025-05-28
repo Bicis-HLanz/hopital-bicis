@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function GestionPage() {
@@ -6,12 +7,14 @@ export default function GestionPage() {
     {
       title: "Bicicletas",
       href: "/gestionar/bicicletas",
-      description: "Administrar inventario de bicicletas"
+      description: "Administrar inventario",
+      image: "/bici.jpg"
     },
     {
       title: "Usuarios",
       href: "/gestionar/usuarios",
-      description: "Gestionar usuarios del sistema"
+      description: "Gestionar usuarios del sistema",
+      image: "/alumno.jpg"
     }
   ];
 
@@ -23,6 +26,15 @@ export default function GestionPage() {
           {gestionItems.map((item, index) => (
             <li key={index} className={styles.li}>
               <Link href={item.href} className={styles.link}>
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={300}
+                    height={180}
+                    className={styles.cardImage}
+                  />
+                </div>
                 <span>{item.title}</span>
                 <p>{item.description}</p>
               </Link>
