@@ -80,6 +80,9 @@ const LoginForm: React.FC = () => {
 
     setLoggedInUser((await account.get()) as User);
 
+    //add session cookie
+    document.cookie = `session=${await account.getSession("current").then(session => session.$id)}; path=/; secure; samesite=strict`;
+
     //navigate to the home page
     router.push("/reservar");
   };
