@@ -1,0 +1,113 @@
+.container {
+  width: 95%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.title {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background-color: var(--accent);
+}
+
+.usersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2.5rem;
+  padding: 0 2rem;
+}
+
+.userCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-light);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 2px var(--primary-50);
+  border: 1px solid var(--border-color);
+  transition: 0.3s ease;
+}
+
+.userCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0px 10px var(--primary-50);
+}
+
+.userInfo {
+  width: 100%;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.userName {
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.userId {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  font-family: monospace;
+  margin-bottom: 1rem;
+}
+
+.customButton {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.customButton:hover {
+  background-color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .usersList {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .usersList {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+}
