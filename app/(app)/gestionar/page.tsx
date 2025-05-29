@@ -21,26 +21,27 @@ export default function GestionPage() {
   return (
     <main className={styles.main}>
       <section className={styles.section}>
-        <h1>Gestionar</h1>
-        <ul className={styles.ul}>
+        <div className={styles.rowContainer}>
           {gestionItems.map((item, index) => (
-            <li key={index} className={styles.li}>
-              <Link href={item.href} className={styles.link}>
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={300}
-                    height={180}
-                    className={styles.cardImage}
-                  />
-                </div>
-                <span>{item.title}</span>
-                <p>{item.description}</p>
-              </Link>
-            </li>
+            <Link href={item.href} key={index} className={styles.card}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className={styles.image}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  priority={index < 2} // Prioriza las primeras imágenes
+                />
+              </div>
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <p className={styles.cardDescription}>{item.description}</p>
+                <span className={styles.cardLink}>Administrar →</span>
+              </div>
+            </Link>
           ))}
-        </ul>
+        </div>
       </section>
     </main>
   );

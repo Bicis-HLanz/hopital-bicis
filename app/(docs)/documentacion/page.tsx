@@ -96,12 +96,12 @@ const Documentacion = () => {
             <div className={styles.rulesGrid}>
               <div className={styles.ruleCard}>
                 <h3>Duración del alquiler</h3>
-                <p>El alquiler máximo es de 7 días consecutivos por reserva.</p>
+                <p>El alquiler máximo es de 1 mes, se puede renovar.</p>
               </div>
               <div className={styles.ruleCard}>
                 <h3>Horario de recogida</h3>
                 <p>
-                  Las bicicletas deben recogerse entre las 8:00 y 18:00 horas.
+                  Las bicicletas deben recogerse entre las 8:00 y 22:00 horas.
                 </p>
               </div>
               <div className={styles.ruleCard}>
@@ -114,8 +114,8 @@ const Documentacion = () => {
               <div className={styles.ruleCard}>
                 <h3>Multas</h3>
                 <p>
-                  Devoluciones tardías generarán multas según el reglamento del
-                  instituto.
+                  Si rompes o dañas la bicicleta, debes hacerte cargo de los gastos del arreglo.
+                  Si no devuelves la bicicleta se te vetará de la aplicación y se tomarán medidas legales.
                 </p>
               </div>
             </div>
@@ -126,8 +126,7 @@ const Documentacion = () => {
             <div className={styles.faqItem}>
               <h3>¿Qué necesito para alquilar una bicicleta?</h3>
               <p>
-                Debes ser estudiante activo del instituto y presentar tu carné
-                estudiantil al momento de recoger la bicicleta.
+                Debes ser estudiante activo del instituto.
               </p>
             </div>
             <div className={styles.faqItem}>
