@@ -1,41 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { databases } from "@/appwrite";
+import { createSessionClient, getLoggedInUser } from "@/appwriteServer";
+import { redirect } from "next/navigation";
 import BiciCard from "./BiciCard";
-import styles from "./BiciList.module.css";
 import { Bicycle } from "@/models/Bicycle";
+import styles from "./BiciList.module.css";
 
-const BicisList: React.FC = () => {
-  const [documents, setDocuments] = useState<Bicycle[]>([]);
+export default async function HomePage() {
+  const user = await getLoggedInUser();
+  if (!user) redirect("/signup");
 
-  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || "not_set";
-  const collectionId =
-    process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID || "not_set";
+  // list documents from NEXT_PUBLIC_APPWRITE_DATABASE_ID  NEXT_PUBLIC_APPWRITE_COLLECTION_ID=
 
-  useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        const response = await databases.listDocuments(
-          databaseId,
-          collectionId
-        );
-        setDocuments(response.documents as Bicycle[]);
-      } catch (error) {
-        console.error("Error fetching documents:", error);
-      }
-    };
-
-    fetchDocuments();
-  }, [databaseId, collectionId]);
+  const bicycles = await fetchBicycles();
+  console.log("Bicycles:", bicycles);
 
   return (
     <ul className={styles["bici-card"]}>
-      {documents.map((doc) => (
+      {bicycles.map((doc) => (
         <li key={doc.$id} className={styles["bici-card-item"]}>
           <BiciCard doc={doc} />
         </li>
       ))}
     </ul>
   );
-};
+}
+async function fetchBicycles() {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
 
-export default BicisList;
+  const response = await databases.listDocuments(databaseId, collectionId);
+  return response.documents as Bicycle[];
+}
