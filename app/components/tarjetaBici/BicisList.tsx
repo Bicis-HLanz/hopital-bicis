@@ -8,8 +8,6 @@ export default async function HomePage() {
   const user = await getLoggedInUser();
   if (!user) redirect("/signup");
 
-  // list documents from NEXT_PUBLIC_APPWRITE_DATABASE_ID  NEXT_PUBLIC_APPWRITE_COLLECTION_ID=
-
   const bicycles = await fetchBicycles();
   console.log("Bicycles:", bicycles);
 
