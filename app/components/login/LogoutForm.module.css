@@ -12,6 +12,8 @@
   transition: all 0.3s ease;
   border: 1px solid var(--primary-50);
   opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 .userProfile {
@@ -180,5 +182,12 @@
   
   .reserveButton:hover {
     background-color: var(--accent);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
