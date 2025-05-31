@@ -29,7 +29,7 @@ export default function VetarButton({ userId, className = '' }: VetarButtonProps
       aria-label={`Vetar usuario ${userId}`}
     >
       {isLoading ? (
-        <span className={styles.loadingText}>Procesando...</span>
+        <span className={styles.loadingText}>Vetando...</span>
       ) : (
         'Vetar'
       )}

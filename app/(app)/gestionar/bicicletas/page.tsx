@@ -5,6 +5,7 @@ import { databases } from "@/appwriteServer";
 import { Bicycle } from "@/models/Bicycle";
 import Image from "next/image";
 import styles from "./page.module.css";
+import {getBycicleImage} from "@/appwrite";
 
 export default function Page() {
   const [bicycles, setBicycles] = useState<Bicycle[]>([]);
@@ -52,10 +53,10 @@ export default function Page() {
           <div key={bicycle.$id} className={styles.userCard}>
             <div className={styles.userInfo}>
               <Image
-                src={bicycle.imageUrl || "/placeholder.jpg"}
+                src={getBycicleImage(bicycle)}
                 alt={bicycle.name}
-                width={400}
-                height={250}
+                width={200}
+                height={100}
                 className={styles.cardImage}
               />
               <h2 className={styles.userName}>{bicycle.name}</h2>

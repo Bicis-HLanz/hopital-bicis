@@ -7,12 +7,12 @@ const NotFoundPage: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.errorSection}>
         <h1 className={styles.title}>404</h1>
-        <p className={styles.subtitle}>Page Not Found</p>
+        <p className={styles.subtitle}>Página no encontrada</p>
         <p className={styles.message}>
-        Oops! The page you are looking for does not exist.
+        Ups! La página que estás buscando no existe.
         </p>
         <Link href="/" className={styles.link}>
-          Take me back to safety
+          Llévame de vuelta al inicio 🚴🏿‍♀️
         </Link>
       </div>
       <div className={styles.animationSection}>
