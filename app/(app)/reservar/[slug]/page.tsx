@@ -1,47 +1,18 @@
-'use client'
-
-import { databases } from "@/appwriteServer";
 import Image from "next/image";
 import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
 import { getBycicleImage } from "@/appwrite";
 import { Bicycle } from "@/models/Bicycle";
-import React from "react";
+import { createSessionClient } from "@/appwriteServer";
 
-export default function BiciDetails({
+export default async function BiciDetails({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = React.use(params);
-  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID;
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID;
+  const { slug } = await params;
 
-  const [bicycle, setBicycle] = React.useState<Bicycle | null>(null);
-
-  if (!databaseId || !collectionId) {
-    throw new Error("Database ID or Collection ID is not set");
-  }
-
-  React.useEffect(() => {
-    const fetchBicycle = async () => {
-      try {
-        const response = await databases.getDocument<Bicycle>(
-          databaseId,
-          collectionId,
-          slug
-        );
-        setBicycle(response);
-      } catch (error) {
-        console.error("Error fetching bicycle:", error);
-      }
-    }
-    fetchBicycle();
-  }, [slug, databaseId, collectionId]);
-
-  if (!bicycle) {
-    return <div>Loading...</div>;
-  }
+  const bicycle = await fetchBicycle(slug);
 
   return (
     <div className={styles["reservar-grid"]}>
@@ -62,4 +33,17 @@ export default function BiciDetails({
       <ReservarForm bicycle={bicycle} />
     </div>
   );
+}
+
+async function fetchBicycle(bicycleId: string) {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
+
+  const response = await databases.getDocument<Bicycle>(
+          databaseId,
+          collectionId,
+          bicycleId
+        );
+  return response as Bicycle;
 }
