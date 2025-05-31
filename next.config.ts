@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import webpack from "webpack";
 
 const nextConfig: NextConfig = {
   images: {
@@ -9,6 +10,15 @@ const nextConfig: NextConfig = {
         port: '',
       },
     ],
+  },
+  webpack(config) {
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /^isomorphic-form-data$/,
+        `${config.context}/form-data-mock.js`
+      )
+    );
+    return config;
   },
 };
 
