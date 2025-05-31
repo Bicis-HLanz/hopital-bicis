@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/components/login/RegisterForm.module.css";
 import Link from "next/link";
 import { useActionState } from "react";
