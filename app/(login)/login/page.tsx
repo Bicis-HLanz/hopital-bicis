@@ -1,19 +1,22 @@
-// src/app/signup/page.jsx
+// src/app/signup/page.tsx
 
 import {
   getLoggedInUser
 } from "@/appwriteServer";
-
 
 import { ID } from "node-appwrite";
 import { createAdminClient } from "@/appwriteServer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function signUpWithEmail(formData) {
+async function signUpWithEmail(formData: FormData) {
   "use server";
 
-  const data = Object.fromEntries(formData.entries());
+  const data = Object.fromEntries(formData.entries()) as {
+    email: string;
+    password: string;
+    name: string;
+  };
   const { email, password, name } = data;
 
   const { account } = await createAdminClient();
@@ -22,7 +25,7 @@ async function signUpWithEmail(formData) {
   await account.create(ID.unique(), email, password, name);
   const session = await account.createEmailPasswordSession(email, password);
 
-  cookies().set("my-custom-session", session.secret, {
+  (await cookies()).set("my-custom-session", session.secret, {
     path: "/",
     httpOnly: true,
     sameSite: "strict",
@@ -32,7 +35,7 @@ async function signUpWithEmail(formData) {
   redirect("/reservar");
 }
 
-export default async function SignUpPage() {
+export default async function SignUpPage(){
   const user = await getLoggedInUser();
   if (user) redirect("/reservar");
 
@@ -63,4 +66,3 @@ export default async function SignUpPage() {
     </>
   );
 }
-
