@@ -1,37 +1,10 @@
-"use client";
-
-import { getMyReservations } from "@/appwrite";
 import styles from './MiReservaTarjeta.module.css';
 import { Models } from "appwrite";
-import { useEffect, useState } from "react";
 import TarjetaReserva from "./TarjetaReserva";
+import { createSessionClient } from '@/appwriteServer';
 
-const MiReservaTarjeta: React.FC = () => {
-    const [documents, setDocuments] = useState<Models.Document[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchDocuments = async () => {
-            try {
-                const data = await getMyReservations();
-                setDocuments(data);
-            } catch (error) {
-                console.error("Error fetching documents:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDocuments();
-    }, []);
-
-    if (loading) {
-        return (
-            <div className={styles.loadingContainer}>
-                <div className={styles.loadingSpinner}></div>
-                <p>Cargando tus reservas...</p>
-            </div>
-        );
-    }
+export default async function MiReservaTarjeta() {
+    const documents = await fetchReservas();
 
     if (!documents || documents.length === 0) {
         return (
@@ -55,4 +28,11 @@ const MiReservaTarjeta: React.FC = () => {
     );
 };
 
-export default MiReservaTarjeta;
+async function fetchReservas() {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+
+  const response = await databases.listDocuments(databaseId, collectionId);
+  return response.documents as Models.Document[];
+}
