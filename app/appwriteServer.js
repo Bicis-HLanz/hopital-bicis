@@ -22,7 +22,6 @@ export async function getBycicleImage(imageId) {
         imageId
     ).href;
 
-    console.log("URL de la imagen:", url);
     return url;
 }
 
@@ -30,7 +29,7 @@ export async function getBycicleImage(imageId) {
 /**
  * Creates an authenticated Appwrite client using a session cookie
  * 
- * @returns {Promise<object>} An object with getters for Appwrite services (account, storage, databases)
+ * @returns An object with getters for Appwrite services (account, storage, databases)
  * @throws {Error} If no valid session is found in cookies
  */
 export async function createSessionClient() {
@@ -62,7 +61,7 @@ export async function createSessionClient() {
 /**
  * Creates an Appwrite client with API key authentication for admin operations
  * 
- * @returns {Promise<object>} An object with a getter for Appwrite account service
+ * @returns An object with a getter for Appwrite account service
  */
 export async function createAdminClient() {
   const client = new Client()
@@ -82,7 +81,7 @@ export async function createAdminClient() {
 /**
  * Retrieves the currently logged-in user's account information
  * 
- * @returns {Promise<object|null>} User account object if logged in, null otherwise
+ * @returns User account object if logged in, null otherwise
  */
 export async function getLoggedInUser() {
   try {
