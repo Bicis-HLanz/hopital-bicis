@@ -57,5 +57,5 @@ export async function middleware(request: NextRequest) {
 
 // Puedes limitar en qué rutas se ejecuta el middleware
 export const config = {
-  matcher: ['/gestionar/:path*', '/reservar*', '/dashboard/:path*', '/settings/:path*'],
+  matcher: ['/gestionar/:path*', '/reservar', '/dashboard/:path*', '/settings/:path*'],
 }
