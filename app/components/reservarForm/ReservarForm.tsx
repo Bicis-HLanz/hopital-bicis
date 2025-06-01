@@ -1,60 +1,39 @@
 "use client";
-
-import { useState } from "react";
+import { useActionState } from "react";
 import styles from "./ReservarForm.module.css";
-import { createReserva } from "@/appwrite";
+import { createReserva } from "@/actions";
 import { Models } from "appwrite";
+
+const initialState = {
+  message: "",
+};
 
 export default function ReservarForm({
   bicycle,
+  userID,
 }: {
   bicycle: Models.Document;
+  userID: string;
 }) {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const reservar = async (): Promise<void> => {
-    if (!from || !to) {
-      setError("Por favor, completa ambas fechas");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setError("");
-    setSuccess("");
-    
-    try {
-      await createReserva(from, to, bicycle.$id);
-      setSuccess("¡Reserva realizada con éxito!");
-      setFrom("");
-      setTo("");
-      setTimeout(() => setSuccess(""), 5000);
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Ocurrió un error desconocido");
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const [state, formAction, pending] = useActionState(
+    async (prevState: { message: string }, formData: FormData) => {
+      return createReserva(prevState, bicycle.$id, userID, formData);
+    },
+    initialState
+  );
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} action={formAction}>
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
           type="date"
           id="from"
           name="from"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
           placeholder=" "
-          disabled={isSubmitting}
+          disabled={pending}
+          required
         />
         <label className={styles.formLabel} htmlFor="from">
           Fecha de inicio
@@ -66,26 +45,24 @@ export default function ReservarForm({
           type="date"
           id="to"
           name="to"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
           placeholder=" "
-          disabled={isSubmitting}
+          disabled={pending}
+          required
         />
         <label className={styles.formLabel} htmlFor="to">
           Fecha de fin
         </label>
       </div>
       
-      {error && <p className={styles.errorMessage}>{error}</p>}
+      {state?.message && <p className={styles.errorMessage}>{state.message}</p>}
       {success && <p className={styles.successMessage}>{success}</p>}
       
       <button 
-        type="button" 
+        type="submit" 
         className={styles.submitButton} 
-        onClick={reservar}
-        disabled={isSubmitting}
+        disabled={pending}
       >
-        {isSubmitting ? "Procesando..." : "Reservar"}
+        {pending ? "Procesando..." : "Reservar"}
       </button>
     </form>
   );

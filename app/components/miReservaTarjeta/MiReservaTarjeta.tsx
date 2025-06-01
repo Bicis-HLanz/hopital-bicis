@@ -1,60 +1,10 @@
-"use client";
-
-import { getMyReservations, /*deleteReservation*/ } from "@/appwrite";
 import styles from './MiReservaTarjeta.module.css';
 import { Models } from "appwrite";
-import { useEffect, useState } from "react";
 import TarjetaReserva from "./TarjetaReserva";
+import { createSessionClient } from '@/appwriteServer';
 
-const MiReservaTarjeta: React.FC = () => {
-    const [documents, setDocuments] = useState<Models.Document[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [deletingId, setDeletingId] = useState<string | null>(null);
-
-    const fetchDocuments = async () => {
-        try {
-            const data = await getMyReservations();
-            setDocuments(data);
-        } catch (error) {
-            console.error("Error fetching documents:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchDocuments();
-    }, []);
-
-    const handleCancel = async (reservationId: string) => {
-        const isConfirmed = window.confirm(
-            "¿Estás seguro de que quieres cancelar esta reserva?\n\n" +
-            "Esta acción no se puede deshacer."
-        );
-
-        if (!isConfirmed) return;
-
-        setDeletingId(reservationId);
-        
-       /* try {
-            await deleteReservation(reservationId);
-            setDocuments(prev => prev.filter(doc => doc.$id !== reservationId));
-        } catch (error) {
-            console.error("Error al cancelar reserva:", error);
-            alert("No se pudo cancelar la reserva. Por favor intenta nuevamente.");
-        } finally {
-            setDeletingId(null);
-        }*/
-    };
-
-    if (loading) {
-        return (
-            <div className={styles.loadingContainer}>
-                <div className={styles.loadingSpinner}></div>
-                <p>Cargando tus reservas...</p>
-            </div>
-        );
-    }
+export default async function MiReservaTarjeta() {
+    const documents = await fetchReservas();
 
     if (!documents || documents.length === 0) {
         return (
@@ -89,4 +39,11 @@ const MiReservaTarjeta: React.FC = () => {
     );
 };
 
-export default MiReservaTarjeta;
+async function fetchReservas() {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+
+  const response = await databases.listDocuments(databaseId, collectionId);
+  return response.documents as Models.Document[];
+}

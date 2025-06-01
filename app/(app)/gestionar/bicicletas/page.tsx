@@ -1,55 +1,17 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { databases } from "@/appwriteServer";
-import { Bicycle } from "@/models/Bicycle";
+import { createSessionClient } from "@/appwriteServer"
+import { Bicycle } from "@/models/Bicycle"
 import Image from "next/image";
 import styles from "./page.module.css";
-import {getBycicleImage} from "@/appwrite";
+import { getBycicleImage } from "@/appwrite";
 
-export default function Page() {
-  const [bicycles, setBicycles] = useState<Bicycle[]>([]);
-  const [loading, setLoading] = useState(true);
+export default async function Page() {
+  const bicyclesList = await fetchBicycles();
 
-  useEffect(() => {
-    const fetchBicycles = async () => {
-      try {
-        const response = await databases.listDocuments(
-          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
-          process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string
-        );
-        setBicycles(response.documents as Bicycle[]);
-      } catch (error) {
-        console.error("Error fetching bicycles:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBicycles();
-  }, []);
-
-  const deleteBicycle = async (id: string) => {
-    try {
-      await databases.deleteDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
-        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string,
-        id
-      );
-
-      setBicycles((prev) => prev.filter((bike) => bike.$id !== id));
-    } catch (error) {
-      console.error("Error deleting bicycle:", error);
-    }
-  };
-
-  if (loading) return <p className={styles.title}>Cargando bicicletas...</p>;
-
-  return (
+   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Bicicletas</h1>
       <div className={styles.usersList}>
-        {bicycles.map((bicycle) => (
+        {bicyclesList.map((bicycle) => (
           <div key={bicycle.$id} className={styles.userCard}>
             <div className={styles.userInfo}>
               <Image
@@ -73,4 +35,13 @@ export default function Page() {
       </div>
     </div>
   );
+}
+
+async function fetchBicycles() {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
+
+  const response = await databases.listDocuments(databaseId, collectionId);
+  return response.documents as Bicycle[];
 }

@@ -1,12 +1,9 @@
-import { users } from "@/appwriteServer";
+import { createAdminClient} from "@/appwriteServer";
 import ClientUserList from "./ClientUserList";
 import styles from './page.module.css';
 
-export const dynamic = "force-dynamic";
-
 export default async function Page() {
-  const usersListResponse = await users.list();
-  const usersList = usersListResponse.users;
+  const usersList = await fetchUsers();
 
   return (
     <div className={styles.container}>
@@ -14,4 +11,11 @@ export default async function Page() {
       <ClientUserList users={usersList} />
     </div>
   );
+}
+
+async function fetchUsers() {
+  const { users } = await createAdminClient();
+
+  const response = await users.list();
+  return response.users;
 }

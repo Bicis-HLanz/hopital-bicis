@@ -51,7 +51,7 @@ const AppHeader: React.FC = () => {
               className={styles["icon"]}
             />
           </Link>
-          <Link href="/login" className={styles["icon-link"]}>
+          <Link href="/cuenta" className={styles["icon-link"]}>
             <Image
               src="/userIcon.png" 
               alt="Perfil Usuario"
@@ -86,7 +86,7 @@ const AppHeader: React.FC = () => {
                 />
                 <span>Documentación</span>
               </Link>
-              <Link href="/login" className={styles["mobile-link"]} onClick={toggleMenu}>
+              <Link href="/cuenta" className={styles["mobile-link"]} onClick={toggleMenu}>
                 <Image
                   src="/userIcon.png" 
                   alt="Perfil Usuario"
