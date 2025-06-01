@@ -31,7 +31,7 @@ export default function GestionPage() {
                   fill
                   className={styles.image}
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  priority={index < 2} // Prioriza las primeras imágenes
+                  priority={index < 2}
                 />
               </div>
               <div className={styles.cardContent}>
