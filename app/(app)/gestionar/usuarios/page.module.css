@@ -1,0 +1,182 @@
+.container {
+  width: 95%;
+  max-width: 1800px; 
+  margin: 0 auto;
+  padding: 0;
+}
+
+.title {
+  color: var(--primary);
+  font-size: 2.5rem; 
+  margin-bottom: 3rem; 
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px; 
+  height: 4px; 
+  background-color: var(--accent);
+}
+
+.usersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+  gap: 2.5rem; 
+  padding: 0 2rem; 
+}
+
+.userCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-light);
+  border-radius: 12px; 
+  padding: 2rem; 
+  box-shadow: 0 0 2px var(--primary-50); 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--border-color);
+  min-height: 180px; 
+}
+
+.userCard:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 0px 10px var(--primary-50);
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+  padding-right: 1.5rem; 
+}
+
+.userName {
+  color: var(--text);
+  font-size: 1.5rem; 
+  margin-bottom: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  color: var(--text-50);
+  font-size: 1.1rem; 
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userId {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.customButton {
+  margin-left: 2rem; 
+  flex-shrink: 0;
+  padding: 0.9rem 2rem; 
+  font-size: 1.1rem; 
+}
+
+@media (min-width: 2000px) {
+  .usersList {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .usersList {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+  
+  .userCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .usersList {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+  
+  .userCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+  
+  .userInfo {
+    padding-right: 0;
+    width: 100%;
+  }
+  
+  .customButton {
+    margin-left: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .userName {
+    font-size: 1.3rem;
+  }
+  
+  .userEmail {
+    font-size: 1rem;
+  }
+  
+  .customButton {
+    padding: 0.8rem 1.5rem;
+  }
+}
+.searchInput {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 2.5rem auto;
+  padding: 0.9rem 1.2rem;
+  font-size: 1.1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-light);
+  color: var(--text);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 6px var(--primary-50);
+}

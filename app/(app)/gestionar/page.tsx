@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function GestionPage() {
@@ -6,29 +7,41 @@ export default function GestionPage() {
     {
       title: "Bicicletas",
       href: "/gestionar/bicicletas",
-      description: "Administrar inventario de bicicletas"
+      description: "Administrar inventario",
+      image: "/bici.jpg"
     },
     {
       title: "Usuarios",
       href: "/gestionar/usuarios",
-      description: "Gestionar usuarios del sistema"
+      description: "Gestionar usuarios del sistema",
+      image: "/alumno.jpg"
     }
   ];
 
   return (
     <main className={styles.main}>
       <section className={styles.section}>
-        <h1>Gestionar</h1>
-        <ul className={styles.ul}>
+        <div className={styles.rowContainer}>
           {gestionItems.map((item, index) => (
-            <li key={index} className={styles.li}>
-              <Link href={item.href} className={styles.link}>
-                <span>{item.title}</span>
-                <p>{item.description}</p>
-              </Link>
-            </li>
+            <Link href={item.href} key={index} className={styles.card}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className={styles.image}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  priority={index < 2}
+                />
+              </div>
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <p className={styles.cardDescription}>{item.description}</p>
+                <span className={styles.cardLink}>Administrar →</span>
+              </div>
+            </Link>
           ))}
-        </ul>
+        </div>
       </section>
     </main>
   );

@@ -1,16 +1,35 @@
 import { createSessionClient } from "@/appwriteServer"
 import { Bicycle } from "@/models/Bicycle"
+import Image from "next/image";
+import styles from "./page.module.css";
+import { getBycicleImage } from "@/appwrite";
 
 export default async function Page() {
   const bicyclesList = await fetchBicycles();
 
-  return (
-    <div>
-      <h1>Bicicletas</h1>
-      <div>
+   return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Bicicletas</h1>
+      <div className={styles.usersList}>
         {bicyclesList.map((bicycle) => (
-          <div key={bicycle.$id}>
-            <h2>{bicycle.name}</h2>
+          <div key={bicycle.$id} className={styles.userCard}>
+            <div className={styles.userInfo}>
+              <Image
+                src={getBycicleImage(bicycle)}
+                alt={bicycle.name}
+                width={200}
+                height={100}
+                className={styles.cardImage}
+              />
+              <h2 className={styles.userName}>{bicycle.name}</h2>
+              <p className={styles.userId}>ID: {bicycle.$id}</p>
+            </div>
+            <button
+              className={styles.customButton}
+              onClick={() => deleteBicycle(bicycle.$id)}
+            >
+              Borrar bicicleta
+            </button>
           </div>
         ))}
       </div>

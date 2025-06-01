@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getBycicleImage } from "@/appwrite";
 import { Models } from "appwrite";
-import styles from './MiReservaTarjeta.module.css';
+import styles from './TarjetaReserva.module.css';
 
 
 export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
@@ -11,8 +11,8 @@ export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
                 <Image
                     src={getBycicleImage(doc.bicicleta)}
                     alt={doc.bicicleta.name}
-                    width={300}
-                    height={300}
+                    width={200}
+                    height={200}
                     className={styles.image}
                     priority
                 />
@@ -33,9 +33,9 @@ export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
                     </p>
                 </div>
                 <div className={styles.statusBadge}>
-                    {doc.status === 'reserved' ? 'Reservado' :
-                        doc.status === 'started' ? 'En curso' :
-                            doc.status === 'canceled' ? 'Cancelado' :
+                    {new Date(doc.from).getTime() > Date.now() ? 'Reservado' :
+                        new Date(doc.to).getTime() >= Date.now() && new Date(doc.from).getTime() <= Date.now() ? 'En curso' :
+                             new Date(doc.to).getTime() < Date.now() ? 'Terminada' :
                                 'Otro'}
                 </div>
             </div>

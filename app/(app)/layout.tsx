@@ -1,5 +1,5 @@
 import AppHeader from "@/components/mainLayout/Header/AppHeader";
-import styles from "./layout.module.css"; // Create this CSS module
+import styles from "./layout.module.css";
 
 export default function RootLayout({
   children,

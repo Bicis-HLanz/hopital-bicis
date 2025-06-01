@@ -19,8 +19,19 @@ export default async function MiReservaTarjeta() {
         <div className={styles.container}>
             <ul className={styles.list}>
                 {documents.map((doc) => (
-                    <li key={doc.$id} >
+                    <li key={doc.$id}>
                        <TarjetaReserva doc={doc} />
+                       <button 
+                         className={styles.cancelButton}
+                         onClick={() => handleCancel(doc.$id)}
+                         disabled={deletingId === doc.$id}
+                       >
+                         {deletingId === doc.$id ? (
+                           "Cancelando..."
+                         ) : (
+                           "Cancelar Reserva"
+                         )}
+                       </button>
                     </li>
                 ))}
             </ul>

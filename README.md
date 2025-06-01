@@ -1,26 +1,22 @@
-# 🚲 Hospital de Bicicletas
+# Hospital Bikes - LANZE
 
-Aplicación web desarrollada con **React** para alquilar bicicletas y gestionar reservas.
+## Descripción
 
-## 👥 Autores
+**Hospital Bikes** es un proyecto innovador desarrollado en colaboración con:
 
-- Darío Peregrín Alconchel  
-- Cristina Díaz Cabello
+- **👮 Policía Nacional**: Recuperación de bicicletas en mal estado
+- **🏫 Instituto IES Politécnico Hermenegildo Lanz**: Taller de reparación y alquiler de las bicicletas
 
----
+**Objetivos**:
+- ♻️ Promover movilidad sostenible entre estudiantes
+- 🔧 Convertir bicicletas abandonadas en recursos útiles
+- 🚲 Facilitar transporte económico a alumnos con dificultades
+- 🌱 Reducir la huella de carbono institucional
 
-## 🧠 ¿Qué hace esta app?
+## Stack Tecnológico
 
-La app permite:
-
-- Consultar bicicletas disponibles para alquilar.
-- Reservar bicicletas por periodos específicos.
-- Ver y gestionar tus reservas actuales y pasadas.
-
----
-
-## 🧱 Tecnologías utilizadas
-
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [React Router](https://reactrouter.com/)
+| Frontend       | ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white) ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js) |
+|----------------|-------------------------------------------------------------------------------|
+| Backend        | ![Appwrite](https://img.shields.io/badge/Appwrite-F02E65?logo=appwrite)       |
+| Estilos        | ![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?logo=css3)     |
+| Control Versión| ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)      |

@@ -28,10 +28,11 @@ export default function ReservarForm({
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
-          type="datetime-local"
+          type="date"
           id="from"
           name="from"
           placeholder=" "
+          disabled={pending}
           required
         />
         <label className={styles.formLabel} htmlFor="from">
@@ -41,19 +42,27 @@ export default function ReservarForm({
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
-          type="datetime-local"
+          type="date"
           id="to"
           name="to"
           placeholder=" "
+          disabled={pending}
           required
         />
         <label className={styles.formLabel} htmlFor="to">
           Fecha de fin
         </label>
       </div>
+      
       {state?.message && <p className={styles.errorMessage}>{state.message}</p>}
-      <button type="submit" className={styles.submitButton} disabled={pending}>
-        Reservar
+      {success && <p className={styles.successMessage}>{success}</p>}
+      
+      <button 
+        type="submit" 
+        className={styles.submitButton} 
+        disabled={pending}
+      >
+        {pending ? "Procesando..." : "Reservar"}
       </button>
     </form>
   );
