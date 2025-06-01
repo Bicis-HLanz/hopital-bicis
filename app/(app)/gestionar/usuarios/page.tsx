@@ -1,8 +1,7 @@
-import { users } from "@/appwriteServer";
+import { createAdminClient} from "@/appwriteServer";
 
 export default async function Page() {
-  const usersListResponse = await users.list()
-  const usersList = usersListResponse.users
+  const usersList = await fetchUsers();
 
   return (
     <>
@@ -15,4 +14,11 @@ export default async function Page() {
       ))}
     </>
   )
+}
+
+async function fetchUsers() {
+  const { users } = await createAdminClient();
+
+  const response = await users.list();
+  return response.users;
 }
