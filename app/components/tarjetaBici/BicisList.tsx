@@ -6,7 +6,7 @@ import styles from "./BiciList.module.css";
 
 export default async function HomePage() {
   const user = await getLoggedInUser();
-  if (!user) redirect("/signup");
+  if (!user) redirect("/login");
 
   const bicycles = await fetchBicycles();
   // Removed console.log to avoid unnecessary logging in production
