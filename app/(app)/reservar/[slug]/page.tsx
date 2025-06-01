@@ -3,14 +3,22 @@ import styles from "./page.module.css";
 import ReservarForm from "@/components/reservarForm/ReservarForm";
 import { getBycicleImage } from "@/appwrite";
 import { Bicycle } from "@/models/Bicycle";
-import { createSessionClient } from "@/appwriteServer";
+import { createSessionClient, getLoggedInUser } from "@/appwriteServer";
+import { redirect } from "next/navigation";
 
 export default async function BiciDetails({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const user = await getLoggedInUser();
+  if (!user) {
+    return redirect("/login");
+  }
+
   const { slug } = await params;
+
+  
 
   const bicycle = await fetchBicycle(slug);
 
@@ -30,7 +38,7 @@ export default async function BiciDetails({
         </div>
       </div>
 
-      <ReservarForm bicycle={bicycle} />
+      <ReservarForm bicycle={bicycle} userID={user?.$id} />
     </div>
   );
 }

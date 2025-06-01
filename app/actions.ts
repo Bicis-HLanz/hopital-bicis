@@ -156,3 +156,48 @@ export async function signOut() {
 
   redirect("/login");
 }
+
+export async function createReserva(
+  prevState: { message: string },
+  bicicleta: string,
+  userId: string,
+  formData: FormData
+) {
+  const data = Object.fromEntries(formData.entries()) as {
+    from: string;
+    to: string;
+  };
+  const { from, to } = data;
+
+  if(from < to) {
+    return { message: "La fecha de inicio debe ser anterior a la fecha de fin" };
+  }
+  if (from < new Date().toISOString()) {
+    return { message: "La fecha de inicio no puede ser anterior a la fecha actual" };
+  }
+
+  try {
+    const { databases } = await createSessionClient();
+ 
+
+    const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+    const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+
+    await databases.createDocument(
+      databaseId,
+      collectionId,
+      ID.unique(),
+      {
+        from,
+        to,
+        userId,
+        bicicleta,
+        status: "reserved",
+      }
+    );
+
+    return { message: "Reserva creada con éxito" };
+  } catch (error) {
+    return { message: "Error al crear la reserva: " + error };
+  }
+}
