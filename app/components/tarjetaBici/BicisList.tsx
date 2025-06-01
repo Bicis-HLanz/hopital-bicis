@@ -9,7 +9,7 @@ export default async function HomePage() {
   if (!user) redirect("/signup");
 
   const bicycles = await fetchBicycles();
-  console.log("Bicycles:", bicycles);
+  // Removed console.log to avoid unnecessary logging in production
 
   return (
     <ul className={styles["bici-card"]}>
