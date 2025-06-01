@@ -169,7 +169,7 @@ export async function createReserva(
   };
   const { from, to } = data;
 
-  if(from < to) {
+  if(from >= to) {
     return { message: "La fecha de inicio debe ser anterior a la fecha de fin" };
   }
   if (from < new Date().toISOString()) {
