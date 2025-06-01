@@ -160,3 +160,23 @@
     padding: 0.8rem 1.5rem;
   }
 }
+.searchInput {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 2.5rem auto;
+  padding: 0.9rem 1.2rem;
+  font-size: 1.1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-light);
+  color: var(--text);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 6px var(--primary-50);
+}

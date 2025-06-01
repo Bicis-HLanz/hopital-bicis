@@ -48,7 +48,7 @@ export default function ReservarForm({
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
-          type="datetime-local"
+          type="date"
           id="from"
           name="from"
           value={from}
@@ -63,7 +63,7 @@ export default function ReservarForm({
       <div className={styles.formGroup}>
         <input
           className={styles.formInput}
-          type="datetime-local"
+          type="date"
           id="to"
           name="to"
           value={to}

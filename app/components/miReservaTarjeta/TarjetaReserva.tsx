@@ -34,7 +34,7 @@ export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
                 </div>
                 <div className={styles.statusBadge}>
                     {new Date(doc.from).getTime() > Date.now() ? 'Reservado' :
-                        new Date(doc.to).getTime() > Date.now() && new Date(doc.from).getTime() < Date.now() ? 'En curso' :
+                        new Date(doc.to).getTime() >= Date.now() && new Date(doc.from).getTime() <= Date.now() ? 'En curso' :
                              new Date(doc.to).getTime() < Date.now() ? 'Terminada' :
                                 'Otro'}
                 </div>
