@@ -5,7 +5,6 @@ import AppHeader from "@/components/mainLayout/Header/AppHeader";
 const Documentacion = () => {
   return (
     <>
-      <AppHeader />
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>
