@@ -201,6 +201,10 @@ export async function createReserva(
 }
 
 export async function cancelReserva(reserva: Reserva) {
+  if (reserva.to < new Date().toISOString()) {
+    return { message: "No se puede cancelar una reserva que ya ha terminado" };
+  }
+
   const { databases } = await createSessionClient();
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
   const collectionId =
