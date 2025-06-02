@@ -6,6 +6,7 @@ import styles from './TarjetaReserva.module.css';
 
 export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
     return (
+    <>
         <div className={styles.card}>
             <div className={styles.imageContainer}>
                 <Image
@@ -40,5 +41,16 @@ export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
                 </div>
             </div>
         </div>
+        <button 
+            className={styles.cancelButton}
+            disabled={false}
+        >
+            {false ? (
+            "Cancelando..."
+            ) : (
+            "Cancelar Reserva"
+            )}
+        </button>
+    </>
     );
 }

@@ -61,23 +61,6 @@
   max-width: 400px;
 }
 
-.cancelButton {
-  background-color: var(--primary);
-  color: var(--background-light);
-  border: none;
-  padding: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  border-radius: 0 0 8px 8px;
-}
-
-.cancelButton:hover {
-  background-color: var(--accent);
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
