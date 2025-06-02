@@ -58,11 +58,11 @@ export async function signUpWithEmail(
           break;
 
         case "user_already_exists":
-            return {
-                message:
-                "El correo electrónico ya está en uso. Por favor, utiliza otro correo electrónico.",
-            };
-            break;
+          return {
+            message:
+              "El correo electrónico ya está en uso. Por favor, utiliza otro correo electrónico.",
+          };
+          break;
         default:
           return {
             message:
@@ -80,76 +80,74 @@ export async function signUpWithEmail(
   }
 }
 
-
 export async function logInWithEmail(
   prevState: { message: string },
   formData: FormData
 ) {
-    const data = Object.fromEntries(formData.entries()) as {
-        email: string;
-        password: string;
-    };
-    const { email, password } = data;
-    
-    try {
-        const { account } = await createAdminClient();
-    
-        const session = await account.createEmailPasswordSession(email, password);
-    
-        (await cookies()).set("my-custom-session", session.secret, {
-            path: "/",
-            httpOnly: true,
-            sameSite: "strict",
-            secure: true,
-        });
+  const data = Object.fromEntries(formData.entries()) as {
+    email: string;
+    password: string;
+  };
+  const { email, password } = data;
 
-        redirect("/reservar");
-    } catch (error) {
-        if (error instanceof AppwriteException) {
-            switch (error.type) {
-                case "user_invalid_credentials":
-                    return {
-                        message:
-                            "Credenciales inválidas. Por favor, verifica tu correo electrónico y contraseña.",
-                    };
-                    break;
-                case "general_argument_invalid":
-                    return {
-                        message: "la contraseña debe tener entre 8 y 255 caracteres",
-                    };
-                    break;
-                case "general_rate_limit_exceeded":
-                    return {
-                        message:
-                            "Se ha excedido el límite de intentos. Por favor, inténtalo más tarde.",
-                    };
-                    break;
+  try {
+    const { account } = await createAdminClient();
 
-                case "user_already_exists":
-                    return {
-                        message:
-                            "El correo electrónico ya está en uso. Por favor, utiliza otro correo electrónico.",
-                    };
-                    break;
-                default:
-                    return {
-                        message:
-                            "Error inesperado: " +
-                            error.type +
-                            " " +
-                            error.message +
-                            " por favor reporta el error al administrador",
-                    };
-                    break;
-            }
-        } else {
-            return { message: "Error inesperado: " + error };
-        }
+    const session = await account.createEmailPasswordSession(email, password);
+
+    (await cookies()).set("my-custom-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+
+    redirect("/reservar");
+  } catch (error) {
+    if (error instanceof AppwriteException) {
+      switch (error.type) {
+        case "user_invalid_credentials":
+          return {
+            message:
+              "Credenciales inválidas. Por favor, verifica tu correo electrónico y contraseña.",
+          };
+          break;
+        case "general_argument_invalid":
+          return {
+            message: "la contraseña debe tener entre 8 y 255 caracteres",
+          };
+          break;
+        case "general_rate_limit_exceeded":
+          return {
+            message:
+              "Se ha excedido el límite de intentos. Por favor, inténtalo más tarde.",
+          };
+          break;
+
+        case "user_already_exists":
+          return {
+            message:
+              "El correo electrónico ya está en uso. Por favor, utiliza otro correo electrónico.",
+          };
+          break;
+        default:
+          return {
+            message:
+              "Error inesperado: " +
+              error.type +
+              " " +
+              error.message +
+              " por favor reporta el error al administrador",
+          };
+          break;
+      }
+    } else {
+      return { message: "Error inesperado: " + error };
     }
+  }
 }
 
 export async function signOut() {
-
   const { account } = await createSessionClient();
 
   (await cookies()).delete("my-custom-session");
@@ -170,32 +168,31 @@ export async function createReserva(
   };
   const { from, to } = data;
 
-  if(from >= to) {
-    return { message: "La fecha de inicio debe ser anterior a la fecha de fin" };
+  if (from >= to) {
+    return {
+      message: "La fecha de inicio debe ser anterior a la fecha de fin",
+    };
   }
   if (from < new Date().toISOString()) {
-    return { message: "La fecha de inicio no puede ser anterior a la fecha actual" };
+    return {
+      message: "La fecha de inicio no puede ser anterior a la fecha actual",
+    };
   }
 
   try {
     const { databases } = await createSessionClient();
- 
 
     const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-    const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+    const collectionId =
+      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
 
-    await databases.createDocument(
-      databaseId,
-      collectionId,
-      ID.unique(),
-      {
-        from,
-        to,
-        userId,
-        bicicleta,
-        status: "reserved",
-      }
-    );
+    await databases.createDocument(databaseId, collectionId, ID.unique(), {
+      from,
+      to,
+      userId,
+      bicicleta,
+      status: "reserved",
+    });
 
     return { message: "Reserva creada con éxito" };
   } catch (error) {
@@ -206,14 +203,12 @@ export async function createReserva(
 export async function cancelReserva(reserva: Reserva) {
   const { databases } = await createSessionClient();
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+  const collectionId =
+    process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
   try {
-    await databases.updateDocument(
-      databaseId,
-      collectionId,
-      reserva.$id,
-      { status: "cancelled" }
-    );
+    await databases.updateDocument(databaseId, collectionId, reserva.$id, {
+      status: "cancelled",
+    });
     return { message: "Reserva cancelada con éxito" };
   } catch (error) {
     return { message: "Error al cancelar la reserva: " + error };
