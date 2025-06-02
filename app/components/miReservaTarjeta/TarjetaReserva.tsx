@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { getBycicleImage } from "@/appwrite";
-import { Models } from "appwrite";
 import styles from './TarjetaReserva.module.css';
+import Reserva from "@/models/Reserva";
 
 
-export default function TarjetaReserva({ doc, onCancelation }: { doc: Models.Document, onCancelation: () => void }) {
+export default function TarjetaReserva({ doc, onCancelation }: { doc: Reserva, onCancelation: () => void }) {
     return (
     <>
         <div className={styles.card}>
@@ -45,14 +45,10 @@ export default function TarjetaReserva({ doc, onCancelation }: { doc: Models.Doc
         </div>
         <button 
             className={styles.cancelButton}
-            disabled={false}
+            disabled={new Date(doc.to).getTime() < Date.now() || doc.status === 'cancelled'}
             onClick={onCancelation}
         >
-            {false ? (
-            "Cancelando..."
-            ) : (
-            "Cancelar Reserva"
-            )}
+            Cancelar Reserva
         </button>
     </>
     );
