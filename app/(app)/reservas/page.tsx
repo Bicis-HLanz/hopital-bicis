@@ -1,8 +1,9 @@
 import MiReservaTarjeta from "@/components/miReservaTarjeta/MiReservaTarjeta";
 import styles from "./page.module.css";
 import { createSessionClient, getLoggedInUser } from "@/appwriteServer";
-import { Models, Query } from "node-appwrite";
+import { Query } from "node-appwrite";
 import { redirect } from "next/navigation";
+import Reserva from "@/models/Reserva";
 
 export default async function ReservasPage() {
   const user = await getLoggedInUser();
@@ -32,5 +33,5 @@ async function fetchReservas(userID: string) {
     collectionId,
     [Query.equal("userId", userID), Query.notEqual("status", "cancelled")]
   );
-  return response.documents as Models.Document[];
+  return response.documents as Reserva[];
 }

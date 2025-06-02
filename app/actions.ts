@@ -4,6 +4,7 @@ import { AppwriteException, ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "@/appwriteServer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Reserva from "./models/Reserva";
 
 export async function signUpWithEmail(
   prevState: { message: string },
@@ -202,7 +203,7 @@ export async function createReserva(
   }
 }
 
-export async function cancelReserva(reservaId: string) {
+export async function cancelReserva(reserva: Reserva) {
   const { databases } = await createSessionClient();
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
   const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
@@ -210,7 +211,7 @@ export async function cancelReserva(reservaId: string) {
     await databases.updateDocument(
       databaseId,
       collectionId,
-      reservaId,
+      reserva.$id,
       { status: "cancelled" }
     );
     return { message: "Reserva cancelada con éxito" };

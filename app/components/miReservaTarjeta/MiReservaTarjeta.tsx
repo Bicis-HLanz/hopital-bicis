@@ -1,13 +1,13 @@
 "use client";
 
 import styles from './MiReservaTarjeta.module.css';
-import { Models } from "appwrite";
 import TarjetaReserva from "./TarjetaReserva";
 import React from 'react';
 import { cancelReserva } from '@/actions';
+import Reserva from '@/models/Reserva';
 
-export default function MiReservaTarjeta({documents}: {documents: Models.Document[]}) {
-    const [docs, setDocs] = React.useState<Models.Document[]>(documents);
+export default function MiReservaTarjeta({documents}: {documents: Reserva[]}) {
+    const [docs, setDocs] = React.useState<Reserva[]>(documents);
 
     if (!docs || docs.length === 0) {
         return (
@@ -26,7 +26,7 @@ export default function MiReservaTarjeta({documents}: {documents: Models.Documen
                        <TarjetaReserva
                        doc={doc}
                        onCancelation={() => {
-                           cancelReserva(doc.$id);
+                           cancelReserva(doc);
                            setDocs(docs.filter((d) => d.$id !== doc.$id));
                        }}
                        />
