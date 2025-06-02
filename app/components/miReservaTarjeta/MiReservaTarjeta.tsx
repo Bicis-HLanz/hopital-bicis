@@ -1,12 +1,15 @@
+"use client";
+
 import styles from './MiReservaTarjeta.module.css';
 import { Models } from "appwrite";
 import TarjetaReserva from "./TarjetaReserva";
-import { createSessionClient } from '@/appwriteServer';
+import React from 'react';
+import { cancelReserva } from '@/actions';
 
-export default async function MiReservaTarjeta() {
-    const documents = await fetchReservas();
+export default function MiReservaTarjeta({documents}: {documents: Models.Document[]}) {
+    const [docs, setDocs] = React.useState<Models.Document[]>(documents);
 
-    if (!documents || documents.length === 0) {
+    if (!docs || docs.length === 0) {
         return (
             <div className={styles.emptyState}>
                 <h3>No tienes reservas aún</h3>
@@ -18,21 +21,18 @@ export default async function MiReservaTarjeta() {
     return (
         <div className={styles.container}>
             <ul className={styles.list}>
-                {documents.map((doc) => (
+                {docs.map((doc) => (
                     <li key={doc.$id}>
-                       <TarjetaReserva doc={doc} />
+                       <TarjetaReserva
+                       doc={doc}
+                       onCancelation={() => {
+                           cancelReserva(doc.$id);
+                           setDocs(docs.filter((d) => d.$id !== doc.$id));
+                       }}
+                       />
                     </li>
                 ))}
             </ul>
         </div>
     );
 };
-
-async function fetchReservas() {
-  const { databases } = await createSessionClient();
-  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
-
-  const response = await databases.listDocuments(databaseId, collectionId);
-  return response.documents as Models.Document[];
-}

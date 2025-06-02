@@ -201,3 +201,20 @@ export async function createReserva(
     return { message: "Error al crear la reserva: " + error };
   }
 }
+
+export async function cancelReserva(reservaId: string) {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+  try {
+    await databases.updateDocument(
+      databaseId,
+      collectionId,
+      reservaId,
+      { status: "cancelled" }
+    );
+    return { message: "Reserva cancelada con éxito" };
+  } catch (error) {
+    return { message: "Error al cancelar la reserva: " + error };
+  }
+}

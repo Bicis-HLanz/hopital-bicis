@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { getBycicleImage } from "@/appwrite";
 import { Models } from "appwrite";
 import styles from './TarjetaReserva.module.css';
 
 
-export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
+export default function TarjetaReserva({ doc, onCancelation }: { doc: Models.Document, onCancelation: () => void }) {
     return (
     <>
         <div className={styles.card}>
@@ -44,6 +46,7 @@ export default function TarjetaReserva({ doc }: { doc: Models.Document }) {
         <button 
             className={styles.cancelButton}
             disabled={false}
+            onClick={onCancelation}
         >
             {false ? (
             "Cancelando..."
