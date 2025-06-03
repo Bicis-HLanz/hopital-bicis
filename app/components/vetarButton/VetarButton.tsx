@@ -2,36 +2,42 @@
 
 import { useState } from 'react';
 import styles from './VetarButton.module.css';
+import { vetarUsuario } from '@/actions';
+import { Models } from 'node-appwrite';
 
 interface VetarButtonProps {
-  userId: string;
+  user: Models.User<Models.Preferences>;
   className?: string;
 }
 
-export default function VetarButton({ userId, className = '' }: VetarButtonProps) {
+export default function VetarButton({ user, className = '' }: VetarButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVetar = () => {
     setIsLoading(true);
-    console.log(`Vetando usuario: ${userId}`);
-    // Simulamos una llamada API
-    setTimeout(() => {
-      console.log(`Usuario ${userId} vetado`);
+
+    vetarUsuario(user.$id).then(() => {
       setIsLoading(false);
-    }, 1000);
+    });
   };
+
+  const isDisabled = user.labels?.includes('vetado');
 
   return (
     <button
       onClick={handleVetar}
-      disabled={isLoading}
+      disabled={isLoading || isDisabled}
       className={`${styles.vetarButton} ${className}`}
-      aria-label={`Vetar usuario ${userId}`}
+      aria-label={`Vetar usuario ${user.name}`}
     >
       {isLoading ? (
         <span className={styles.loadingText}>Vetando...</span>
       ) : (
-        'Vetar'
+        isDisabled ? (
+          <span className={styles.disabledText}>Vetado</span>
+        ) : (
+          <span className={styles.buttonText}>Vetar</span>
+        )
       )}
     </button>
   );

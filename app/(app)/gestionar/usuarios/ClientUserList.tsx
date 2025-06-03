@@ -3,20 +3,13 @@
 import { useState, useEffect } from "react";
 import VetarButton from "@/components/vetarButton/VetarButton";
 import styles from './page.module.css';
+import { Models } from "node-appwrite";
 
-interface User {
-  $id: string;
-  name: string;
-  email: string;
-}
 
-interface Props {
-  users: User[];
-}
 
-export default function ClientUserList({ users }: Props) {
+export default function ClientUserList({ users }: { users: Models.User<Models.Preferences>[] }) {
   const [search, setSearch] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState<User[]>(users);
+  const [filteredUsers, setFilteredUsers] = useState<Models.User<Models.Preferences>[]>(users);
 
   useEffect(() => {
     const query = search.toLowerCase();
@@ -42,7 +35,7 @@ export default function ClientUserList({ users }: Props) {
               <h2 className={styles.userName}>{user.name}</h2>
               <p className={styles.userEmail}>{user.email}</p>
             </div>
-            <VetarButton userId={user.$id} className={styles.customButton} />
+            <VetarButton user={user} className={styles.customButton} />
           </div>
         ))}
       </div>

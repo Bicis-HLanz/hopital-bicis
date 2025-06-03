@@ -218,3 +218,15 @@ export async function cancelReserva(reserva: Reserva) {
     return { message: "Error al cancelar la reserva: " + error };
   }
 }
+
+
+export async function vetarUsuario(userId: string) {
+  const { users } = await createAdminClient();
+
+  const user = await users.get(userId);
+
+  await users.updateLabels(
+    userId,
+    user.labels ? [...user.labels, 'vetado'] : ['vetado']
+  );
+}
