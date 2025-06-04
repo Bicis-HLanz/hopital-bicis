@@ -170,12 +170,12 @@ export async function createReserva(
 
   if (from >= to) {
     return {
-      message: "La fecha de inicio debe ser anterior a la fecha de fin",
+      message: "Error: La fecha de inicio debe ser anterior a la fecha de fin",
     };
   }
   if (from < new Date().toISOString()) {
     return {
-      message: "La fecha de inicio no puede ser anterior a la fecha actual",
+      message: "Error: La fecha de inicio no puede ser anterior a la fecha actual",
     };
   }
 

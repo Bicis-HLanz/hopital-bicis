@@ -54,12 +54,12 @@ export default function ReservarForm({
         </label>
       </div>
       
-      {state?.message && <p className={styles.errorMessage}>{state.message}</p>}
-      {success && <p className={styles.successMessage}>{success}</p>}
-      
-      <button 
-        type="submit" 
-        className={styles.submitButton} 
+      {state?.message.includes("error") && <p className={styles.errorMessage}>{state.message}</p>}
+      {state?.message.includes("éxito") && <p className={styles.successMessage}>{state.message}</p>}
+
+      <button
+        type="submit"
+        className={styles.submitButton}
         disabled={pending}
       >
         {pending ? "Procesando..." : "Reservar"}
