@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { getBycicleImage } from "@/appwrite";
 import BorrarBiciButton from "@/components/borrarBiciButton/BorrarBiciButton";
+import Link from "next/link";
 
 export default async function Page() {
   const bicyclesList = await fetchBicycles();
@@ -29,6 +30,7 @@ export default async function Page() {
           </div>
         ))}
       </div>
+      <Link href="/gestionar/bicicletas/crearBicicleta" className={styles.botonflotante}>Crear Bicicleta</Link>
     </div>
   );
 }

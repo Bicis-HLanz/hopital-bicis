@@ -1,3 +1,22 @@
+.botonflotante {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  color: var(--background);
+  border-radius: 8px;
+  background-color: var(--accent);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botonflotante:hover {
+  background-color: var(--secondary);
+  transform: scale(1.03);
+}
+
 .container {
   width: 95%;
   max-width: 1800px;
@@ -111,5 +130,19 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 0;
+  }
+  .botonflotante {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    bottom: 6rem;
+    right: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .botonflotante {
+    right: 1rem;
+    bottom: 6rem;
+    padding: 1rem;
+    font-size: 1rem;
   }
 }
