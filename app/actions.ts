@@ -230,3 +230,16 @@ export async function vetarUsuario(userId: string) {
     user.labels ? [...user.labels, 'vetado'] : ['vetado']
   );
 }
+
+export async function deleteBicycle(bicycleId: string) {
+  const { databases } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
+
+  try {
+    await databases.deleteDocument(databaseId, collectionId, bicycleId);
+    return { message: "Bicicleta eliminada con éxito" };
+  } catch (error) {
+    return { message: "Error al eliminar la bicicleta: " + error };
+  }
+}
