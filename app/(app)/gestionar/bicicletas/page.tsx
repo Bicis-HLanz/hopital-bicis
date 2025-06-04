@@ -3,6 +3,7 @@ import { Bicycle } from "@/models/Bicycle"
 import Image from "next/image";
 import styles from "./page.module.css";
 import { getBycicleImage } from "@/appwrite";
+import BorrarBiciButton from "@/components/borrarBiciButton/BorrarBiciButton";
 
 export default async function Page() {
   const bicyclesList = await fetchBicycles();
@@ -24,12 +25,7 @@ export default async function Page() {
               <h2 className={styles.userName}>{bicycle.name}</h2>
               <p className={styles.userId}>ID: {bicycle.$id}</p>
             </div>
-            <button
-              className={styles.customButton}
-              onClick={() => deleteBicycle(bicycle.$id)}
-            >
-              Borrar bicicleta
-            </button>
+            <BorrarBiciButton bicycle={bicycle} />
           </div>
         ))}
       </div>
