@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./page.module.css";
-import AppHeader from "@/components/mainLayout/Header/AppHeader";
 
 const Documentacion = () => {
   return (
