@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'cloud.appwrite.io',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'hospitalbicis.ieshlanz.es',
+        port: '',
+      },
     ],
   },
   webpack(config) {
