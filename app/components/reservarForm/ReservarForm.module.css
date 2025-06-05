@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  max-width: 350px;
   margin: 0 auto;
   padding: 2.4rem;
   background-color: transparent;
+  max-width: 400px;
+  width: 100%;
 }
 
 .formGroup {
@@ -20,16 +21,15 @@
   font-size: 0.95rem;
   transition: all 0.3s ease;
   pointer-events: none;
-  background: var(--background);
   padding: 0 0.4rem;
 }
 
 .formInput {
   width: 100%;
   padding: 1rem;
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--accent);
   border-radius: 6px;
-  background-color: transparent;
+  background: var(--accent2);
   color: var(--text);
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -48,14 +48,15 @@
   font-size: 0.8rem;
   color: var(--accent);
   background: var(--background-light);
+  border-radius: 8px;
 }
 
 .submitButton {
   padding: 1rem;
-  background-color: transparent;
-  color: var(--accent);
+  background-color: var(--primary);
+  color: var(--background);
   border: 1px solid var(--accent);
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
@@ -65,8 +66,7 @@
 }
 
 .submitButton:hover {
-  background-color: var(--accent-50);
-  color: var(--text);
+  background-color: var(--secondary);
 }
 
 .successMessage {

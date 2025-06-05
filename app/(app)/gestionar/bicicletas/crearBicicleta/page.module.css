@@ -1,39 +1,21 @@
 .formContainer {
-  margin: 0 auto;
-  padding: 1rem 5rem;
+  margin: 1rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  width: 90%;
   border-radius: 8px;
-  background-color: var(--background-light)
-}
-
-.successMessage {
-  color: #2e7d32; 
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
-  background-color: #e8f5e9; 
-  padding: 0.4rem 0.8rem;
-  border-left: 2px solid #4caf50;
-  animation: fadeIn 0.3s ease-out;
-  text-align: center;
-}
-
-.errorMessage {
-  color: #dc3545;
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  background-color: rgba(220, 53, 69, 0.05);
-  border-left: 2px solid #dc3545;
-  text-align: center;
+  background-color: var(--background-light);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--primary);
   margin-bottom: 2rem;
   text-align: center;
-  text-align: center;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 .title::after {
@@ -42,7 +24,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
+  width: 180px;
   height: 4px;
   background-color: var(--accent);
 }
@@ -54,47 +36,117 @@
 }
 
 .label {
-  font-weight: bold;
+  font-weight: 600;
   color: var(--text);
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
 }
 
 .input,
 .textarea,
 .inputFile {
-  padding: 0.75rem;
-  padding-right: 10rem;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--accent2);
   border-radius: 8px;
   margin-top: 0.5rem;
   background-color: var(--background);
+  transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus,
+.inputFile:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
 .textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
 }
 
 .buttonGroup {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .createButton {
-  flex: 1;
   background-color: var(--primary);
   color: white;
-  padding: 0.75rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .createButton:hover {
   background-color: var(--secondary);
+}
+
+.successMessage,
+.errorMessage {
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid;
+  border-radius: 8px;
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.successMessage {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.errorMessage {
+  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.05);
+  border-color: #dc3545;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .formContainer {
+    margin: 2rem auto;
+    padding: 1rem;
+    width: 95%;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .input,
+  .textarea,
+  .inputFile {
+    font-size: 0.95rem;
+  }
+
+  .createButton {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

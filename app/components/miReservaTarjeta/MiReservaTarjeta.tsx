@@ -21,7 +21,7 @@ export default function MiReservaTarjeta({documents}: {documents: Reserva[]}) {
     return (
         <div className={styles.container}>
             <ul className={styles.list}>
-                {docs.map((doc) => (
+                {docs.slice().reverse().map((doc) => (
                     <li key={doc.$id}>
                        <TarjetaReserva
                        doc={doc}
