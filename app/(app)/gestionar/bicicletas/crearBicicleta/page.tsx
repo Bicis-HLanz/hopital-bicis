@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import { databases, storage } from "@/appwriteServer";
-import { ID } from "appwrite";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -24,26 +22,7 @@ export default function CrearBicicletaPage() {
     setLoading(true);
 
     try {
-      let fileId = "";
-      if (imageFile) {
-        const file = await storage.createFile(
-          process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
-          ID.unique(),
-          imageFile
-        );
-        fileId = file.$id;
-      }
-
-      await databases.createDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
-        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!,
-        ID.unique(),
-        {
-          name,
-          description,
-          image: fileId,
-        }
-      );
+     console.log("Creando bicicleta:", { name, description, imageFile });
 
       router.push("/bicicletas");
     } catch (error) {
