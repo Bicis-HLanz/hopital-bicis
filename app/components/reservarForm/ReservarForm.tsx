@@ -54,7 +54,7 @@ export default function ReservarForm({
         </label>
       </div>
       
-      {state?.message.includes("error") && <p className={styles.errorMessage}>{state.message}</p>}
+      {state?.message.toLowerCase().includes("error") && <p className={styles.errorMessage}>{state.message}</p>}
       {state?.message.includes("éxito") && <p className={styles.successMessage}>{state.message}</p>}
 
       <button

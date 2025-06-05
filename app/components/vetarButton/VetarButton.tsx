@@ -25,7 +25,12 @@ export default function VetarButton({ user, className = '' }: VetarButtonProps) 
 
   return (
     <button
-      onClick={handleVetar}
+      onClick={() => {
+        const confirmCancel = window.confirm("¿Estás seguro de que quieres vetar a este usuario?");
+        if (confirmCancel) {
+          handleVetar();
+        }
+      }}
       disabled={isLoading || isDisabled}
       className={`${styles.vetarButton} ${className}`}
       aria-label={`Vetar usuario ${user.name}`}
