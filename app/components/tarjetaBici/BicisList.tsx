@@ -1,16 +1,8 @@
-import { createSessionClient, getLoggedInUser } from "@/appwriteServer";
-import { redirect } from "next/navigation";
 import BiciCard from "./BiciCard";
 import { Bicycle } from "@/models/Bicycle";
 import styles from "./BiciList.module.css";
 
-export default async function HomePage() {
-  const user = await getLoggedInUser();
-  if (!user) redirect("/login");
-
-  const bicycles = await fetchBicycles();
-  // Removed console.log to avoid unnecessary logging in production
-
+export default async function BicisList({ bicycles }: { bicycles: Bicycle[] }) {
   return (
     <ul className={styles["bici-card"]}>
       {bicycles.map((doc) => (
@@ -20,12 +12,4 @@ export default async function HomePage() {
       ))}
     </ul>
   );
-}
-async function fetchBicycles() {
-  const { databases } = await createSessionClient();
-  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
-
-  const response = await databases.listDocuments(databaseId, collectionId);
-  return response.documents as Bicycle[];
 }
