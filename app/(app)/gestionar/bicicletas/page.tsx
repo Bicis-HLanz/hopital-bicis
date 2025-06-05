@@ -24,7 +24,6 @@ export default async function Page() {
                 className={styles.cardImage}
               />
               <h2 className={styles.userName}>{bicycle.name}</h2>
-              <p className={styles.userId}>ID: {bicycle.$id}</p>
             </div>
             <BorrarBiciButton bicycle={bicycle} />
           </div>

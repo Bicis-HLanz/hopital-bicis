@@ -1,7 +1,29 @@
 .formContainer {
-  max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 5rem;
+  border-radius: 8px;
+  background-color: var(--background-light)
+}
+
+.successMessage {
+  color: #2e7d32; 
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  background-color: #e8f5e9; 
+  padding: 0.4rem 0.8rem;
+  border-left: 2px solid #4caf50;
+  animation: fadeIn 0.3s ease-out;
+  text-align: center;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(220, 53, 69, 0.05);
+  border-left: 2px solid #dc3545;
+  text-align: center;
 }
 
 .title {
@@ -9,6 +31,20 @@
   color: var(--primary);
   margin-bottom: 2rem;
   text-align: center;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background-color: var(--accent);
 }
 
 .form {
@@ -28,10 +64,12 @@
 .textarea,
 .inputFile {
   padding: 0.75rem;
+  padding-right: 10rem;
   font-size: 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--accent2);
   border-radius: 8px;
   margin-top: 0.5rem;
+  background-color: var(--background);
 }
 
 .textarea {
@@ -43,7 +81,6 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .createButton {
@@ -59,21 +96,5 @@
 }
 
 .createButton:hover {
-  background-color: var(--secondary);
-}
-
-.cancelButton {
-  flex: 1;
-  background-color: var(--primary);
-  color: white;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cancelButton:hover {
   background-color: var(--secondary);
 }

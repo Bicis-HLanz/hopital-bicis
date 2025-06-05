@@ -94,21 +94,6 @@
   margin-bottom: 1rem;
 }
 
-.customButton {
-  background-color: var(--primary);
-  color: var(--background);
-  padding: 0.9rem 2rem;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.customButton:hover {
-  background-color: var(--accent);
-}
-
 @media (max-width: 1024px) {
   .usersList {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

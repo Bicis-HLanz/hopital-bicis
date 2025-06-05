@@ -247,3 +247,36 @@ export async function deleteBicycle(bicycleId: string) {
     return { message: "Error al eliminar la bicicleta: " + error };
   }
 }
+
+export async function createBicycle(  prevState: { message: string },
+  formData: FormData) {
+  const data = Object.fromEntries(formData.entries()) as {
+    name: string;
+    description: string;
+    photo: File;
+  };
+
+  const {name,description} = data;
+
+
+  const { databases, storage, account } = await createSessionClient();
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
+  const bucketId = process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!;
+  const imageId = ID.unique();
+  console.log(formData);
+  console.log("subiendo como " + (await account.get()).labels)
+  try {
+    await storage.createFile(bucketId, imageId, data.photo);
+    await databases.createDocument(databaseId,collectionId, ID.unique(), {
+      name,
+      description,
+      imageId
+    });
+    console.log("subido");
+    return { message: "Bicicleta creada con éxito" };
+  } catch (error) {
+    console.log(error);
+    return { message: "Error al crear la bicicleta: " + error };
+  }
+}

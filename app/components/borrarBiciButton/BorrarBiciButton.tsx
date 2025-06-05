@@ -2,6 +2,7 @@
 
 import { deleteBicycle } from "@/actions";
 import { useState } from "react";
+import styles from "./BorrarBiciButton.module.css";
 
 export default function BorrarBiciButton({ bicycle }: { bicycle: { $id: string } }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +19,7 @@ export default function BorrarBiciButton({ bicycle }: { bicycle: { $id: string }
     <button
               disabled={isLoading}
               onClick={handleDelete}
+              className={styles.customButton}
             >
               Borrar bicicleta
             </button>

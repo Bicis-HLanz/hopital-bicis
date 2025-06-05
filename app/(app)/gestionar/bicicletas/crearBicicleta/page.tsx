@@ -1,42 +1,26 @@
 'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState, useState } from "react";
 import styles from "./page.module.css";
+import { createBicycle } from "@/actions";
 
 export default function CrearBicicletaPage() {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
-    }
+  const initialState = {
+    message: "",
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-     console.log("Creando bicicleta:", { name, description, imageFile });
-
-      router.push("/bicicletas");
-    } catch (error) {
-      console.error("Error al crear bicicleta:", error);
-      alert("Error al crear la bicicleta");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [state, formAction, pending] = useActionState(
+    createBicycle,
+    initialState
+  );
 
   return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Crear Bicicleta</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} action={formAction}>
         <label className={styles.label}>
           Nombre:
           <input
@@ -44,6 +28,9 @@ export default function CrearBicicletaPage() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            maxLength={30}
+            name="name"
+            id="name"
             className={styles.input}
           />
         </label>
@@ -54,6 +41,9 @@ export default function CrearBicicletaPage() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            maxLength={300}
+            name="description"
+            id="description"
             className={styles.textarea}
           />
         </label>
@@ -63,25 +53,21 @@ export default function CrearBicicletaPage() {
           <input
             type="file"
             accept="image/*"
-            onChange={handleImageChange}
+            name="photo"
+            id="photo"
             className={styles.inputFile}
           />
         </label>
-
+        
+        {state?.message.includes("error") && <p className={styles.errorMessage}>{state.message}</p>}
+        {state?.message.includes("éxito") && <p className={styles.successMessage}>{state.message}</p>}
         <div className={styles.buttonGroup}>
           <button
             type="submit"
             className={styles.createButton}
-            disabled={loading}
+            disabled={pending}
           >
-            {loading ? "Creando..." : "Crear"}
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push("/bicicletas")}
-            className={styles.cancelButton}
-          >
-            Cancelar
+            {pending ? "Creando..." : "Crear"}
           </button>
         </div>
       </form>
