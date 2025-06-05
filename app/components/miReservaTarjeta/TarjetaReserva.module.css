@@ -140,3 +140,7 @@
 .cancelButton:hover {
   background-color: var(--accent);
 }
+
+.cancelButton:disabled{
+  background-color: var(--accent-50);
+}
