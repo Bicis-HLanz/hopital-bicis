@@ -142,7 +142,11 @@ export async function logInWithEmail(
           break;
       }
     } else {
-      return { message: "Error inesperado: " + error };
+      if (error instanceof Error) {
+        return { message: "Error inesperado: " + error.message + "\n" + error.stack };
+      } else {
+        return { message: "Error inesperado: " + String(error) };
+      }
     }
   }
 }
