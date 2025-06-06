@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./page.module.css";
+import AppHeader from "@/components/mainLayout/Header/AppHeader";
 
 const Documentacion = () => {
   return (
     <>
+    <AppHeader />
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>
@@ -52,7 +54,7 @@ const Documentacion = () => {
               <div className={styles.stepNumber}>3</div>
               <div className={styles.stepContent}>
                 <h3>Seleccionar fechas</h3>
-                <p>
+                <div>
                   En la pantalla de reserva específica, selecciona:
                   <ul>
                     <li>Fecha de recogida: día en que recoges la bicicleta</li>
@@ -60,7 +62,7 @@ const Documentacion = () => {
                       Fecha de devolución: día en que devuelves la bicicleta
                     </li>
                   </ul>
-                </p>
+                </div>
               </div>
             </div>
 
