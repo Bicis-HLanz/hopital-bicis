@@ -229,6 +229,37 @@ export async function createReserva(
     };
   }
 
+  // Validar que la bicicleta no esté reservada en el rango de fechas (seguramente por otro usuario)
+  const reservasBicicleta = await databases.listDocuments(
+    databaseId,
+    collectionId,
+    [
+      Query.equal("bicicleta", bicicleta),
+      Query.equal("status", "reserved"),
+      Query.or([
+        Query.and([
+          Query.greaterThanEqual("from", from),
+          Query.lessThan("from", to),
+        ]),
+        Query.and([
+          Query.greaterThanEqual("to", from),
+          Query.lessThan("to", to),
+        ]),
+        Query.and([
+          Query.greaterThanEqual("from", from),
+          Query.lessThan("to", to),
+        ]),
+      ]),
+    ]
+  );
+
+  if (reservasBicicleta.total > 0) {
+    return {
+      message:
+        "Error: La bicicleta ya está reservada en ese rango de fechas por otro usuario",
+    };
+  }
+
   try {
     await databases.createDocument(databaseId, collectionId, ID.unique(), {
       from,
