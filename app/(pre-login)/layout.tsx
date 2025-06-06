@@ -18,39 +18,31 @@ export default function RootLayout({
 
   return (
     <div className={styles.container}>
-      {}
+      { }
       <header className={styles.header}>
         <div className={styles["logo-container"]}>
           <Image
             src="/logo.png"
-            alt="logo"
-            width={38}
-            height={38}
-            priority
-          />
+            alt="Logo Bicis Hlanz"
+            width={40}
+            height={40}
+            >
+          </Image>
           <Image
             src="/logoEscrito.png"
             alt="logo Hospital Bikes"
-            width={160}
-            height={34}
+            width={150}
+            height={35}
             priority
             className={styles["text-logo"]}
           />
         </div>
 
-        {}
+        { }
         <div className={styles["header-right"]}>
-          <Link href="/documentacion" className={styles["icon-link"]} aria-label="Documentación">
-            <Image
-              src="/info.png" 
-              alt=""
-              width={30}
-              height={30}
-            />
-          </Link>
           <Link href="/login" className={styles["icon-link"]} aria-label="Iniciar sesión">
             <Image
-              src="/userIcon.png" 
+              src="/userIcon.png"
               alt=""
               width={35}
               height={35}
@@ -58,10 +50,10 @@ export default function RootLayout({
           </Link>
         </div>
 
-        {}
+        { }
         <div className={styles["mobile-menu"]}>
-          <button 
-            className={`${styles["hamburger"]} ${isMenuOpen ? styles["open"] : ""}`} 
+          <button
+            className={`${styles["hamburger"]} ${isMenuOpen ? styles["open"] : ""}`}
             onClick={toggleMenu}
             aria-label="Menú"
             aria-expanded={isMenuOpen}
@@ -71,29 +63,16 @@ export default function RootLayout({
             <div className={`${styles["hamburger-line"]} ${isMenuOpen ? styles["line3"] : ""}`}></div>
           </button>
 
-          {}
+          { }
           {isMenuOpen && (
             <div className={styles["mobile-dropdown"]}>
-              <Link 
-                href="/documentacion" 
-                className={styles["mobile-link"]} 
+              <Link
+                href="/login"
+                className={styles["mobile-link"]}
                 onClick={toggleMenu}
               >
                 <Image
-                  src="/info.png" 
-                  alt="Documentación"
-                  width={20}
-                  height={20}
-                />
-                <span>Documentación</span>
-              </Link>
-              <Link 
-                href="/login" 
-                className={styles["mobile-link"]} 
-                onClick={toggleMenu}
-              >
-                <Image
-                  src="/userIcon.png" 
+                  src="/userIcon.png"
                   alt="Iniciar sesión"
                   width={20}
                   height={20}
@@ -104,11 +83,11 @@ export default function RootLayout({
           )}
         </div>
       </header>
-      
-      {}
+
+      { }
       <div className={styles.squareGrid} />
-      
-      {}
+
+      { }
       <main className={styles.children}>
         {children}
       </main>
