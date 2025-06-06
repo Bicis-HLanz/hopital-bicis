@@ -1,0 +1,35 @@
+.userCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-light);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 0 2px var(--primary-50);
+  border: 1px solid var(--border-color);
+  transition: 0.3s ease;
+}
+
+.userCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0px 10px var(--primary-50);
+}
+
+.userInfo {
+  width: 100%;
+}
+
+.cardImage {
+  width: 50%;
+  margin: auto;
+  display: block;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.userName {
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}

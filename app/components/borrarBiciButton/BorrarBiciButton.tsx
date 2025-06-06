@@ -4,13 +4,14 @@ import { deleteBicycle } from "@/actions";
 import { useState } from "react";
 import styles from "./BorrarBiciButton.module.css";
 
-export default function BorrarBiciButton({ bicycle }: { bicycle: { $id: string } }) {
+export default function BorrarBiciButton({ bicycle, handleDelete }: { bicycle: { $id: string }, handleDelete: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleDelete = () => {
+  const handleDeleteBiclycle = () => {
     setIsLoading(true);
 
     deleteBicycle(bicycle.$id).then(() => {
+      handleDelete();
       setIsLoading(false);
     });
   };
@@ -21,7 +22,7 @@ export default function BorrarBiciButton({ bicycle }: { bicycle: { $id: string }
       onClick={() => {
         const confirmCancel = window.confirm("¿Estás seguro de que quieres borrar la bicicleta?");
         if (confirmCancel) {
-          handleDelete();
+          handleDeleteBiclycle();
         }
       }}
       className={styles.customButton}
