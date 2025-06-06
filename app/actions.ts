@@ -1,6 +1,6 @@
 "use server";
 
-import { AppwriteException, ID } from "node-appwrite";
+import { AppwriteException, ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "@/appwriteServer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -173,6 +173,8 @@ export async function createReserva(
   };
   const { from, to } = data;
 
+
+  // Validaciones simples
   if (from >= to) {
     return {
       message: "Error: La fecha de inicio debe ser anterior a la fecha de fin",
@@ -184,13 +186,25 @@ export async function createReserva(
     };
   }
 
+  // validar que el usuario no tenga una reserva activa
+  const { databases } = await createSessionClient();
+
+  const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
+  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+
+  const reservasActivas = await databases.listDocuments(databaseId, collectionId, [
+    Query.equal("userId", userId),
+    Query.equal("status", "reserved"),
+    Query.greaterThanEqual("from", new Date().toISOString()),
+  ]);
+
+  if (reservasActivas.total > 0) {
+    return {
+      message: "Error: Ya tienes una reserva activa",
+    };
+  }
+
   try {
-    const { databases } = await createSessionClient();
-
-    const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-    const collectionId =
-      process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
-
     await databases.createDocument(databaseId, collectionId, ID.unique(), {
       from,
       to,
