@@ -35,7 +35,6 @@ export async function signUpWithEmail(
       secure: true,
     });
 
-    redirect("/reservar");
   } catch (error) {
     if (error instanceof AppwriteException) {
       switch (error.type) {
@@ -77,7 +76,8 @@ export async function signUpWithEmail(
     } else {
       return { message: "Error inesperado: " + error };
     }
-  }
+  } 
+  redirect("/reservar");
 }
 
 export async function logInWithEmail(
@@ -102,7 +102,7 @@ export async function logInWithEmail(
       secure: true,
     });
 
-    redirect("/reservar");
+    
   } catch (error) {
     if (error instanceof AppwriteException) {
       switch (error.type) {
@@ -149,6 +149,7 @@ export async function logInWithEmail(
       }
     }
   }
+  redirect("/reservar");
 }
 
 export async function signOut() {
