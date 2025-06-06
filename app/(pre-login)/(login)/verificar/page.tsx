@@ -23,7 +23,7 @@ export default function VerificarPage() {
 
     if (!secret || !userId) {
       setVerificationStatus("error");
-      setErrorMessage("Parámetros de verificación inválidos o faltantes");
+      setErrorMessage("Hemos mandado un email de verificación! Comprueba tu bandeja de entrada para verificar tu cuenta.");
       return;
     }
 
