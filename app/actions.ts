@@ -1,7 +1,7 @@
 "use server";
 
 import { AppwriteException, ID, Query } from "node-appwrite";
-import { createAdminClient, createSessionClient } from "@/appwriteServer";
+import { createAdminClient, createSessionClient, createVerficationMail } from "@/appwriteServer";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Reserva from "./models/Reserva";
@@ -44,6 +44,8 @@ export async function signUpWithEmail(
       sameSite: "strict",
       secure: true,
     });
+
+    createVerficationMail();
   } catch (error) {
     if (error instanceof AppwriteException) {
       switch (error.type) {

@@ -94,3 +94,22 @@ export async function getLoggedInUser() {
     return null;
   }
 }
+
+export async function createVerficationMail() {
+    const client = new Client()
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID);
+
+  const cookieStore = await cookies();
+  const session = cookieStore.get("my-custom-session");
+  if (!session || !session.value) {
+    throw new Error("No session");
+  }
+
+  client.setSession(session.value);
+
+  const account = new Account(client);
+
+  await account.createVerification('https://hospitalbicis.ieshlanz.es/verificar');
+
+}
