@@ -18,6 +18,16 @@ export async function signUpWithEmail(
   };
   const { email, password, repeatPassword, name } = data;
 
+  const emailDomain = email.split("@").at(-1);
+  const allowedDomain = process.env.NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN!;
+  if (emailDomain !== allowedDomain) {
+    return {
+      message:
+        "Error: El dominio del correo electrónico no está permitido, usa tu email de " +
+        allowedDomain,
+    };
+  }
+
   if (password !== repeatPassword) {
     return { message: "Las contraseñas no coinciden" };
   }
