@@ -6,44 +6,43 @@ import styles from "./BiciList.module.css";
 import { useEffect, useState } from "react";
 import Reserva from "@/models/Reserva";
 
-export default function BicisList({ bicycles, reservas }: { bicycles: Bicycle[], reservas: Reserva[] }) {
+export default function BicisList({
+  bicycles,
+  reservas,
+}: {
+  bicycles: Bicycle[];
+  reservas: Reserva[];
+}) {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [filteredBicycles, setFilteredBicycles] = useState<Bicycle[]>(bicycles);
 
   useEffect(() => {
-    // Filter bicycles that have a reservation that overlaps with the selected date range
-    if (!fromDate && !toDate) {
+    if (!fromDate || !toDate) {
       setFilteredBicycles(bicycles);
       return;
     }
 
-    const from = fromDate ? new Date(fromDate) : null;
-    const to = toDate ? new Date(toDate) : null;
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
 
-    const isOverlapping = (reserva: Reserva) => {
-      const reservaFrom = new Date(reserva.fromDate);
-      const reservaTo = new Date(reserva.toDate);
+    const reservedBicyclesInRange = reservas
+      .filter((reserva) => {
+        const reservaFrom = new Date(reserva.from);
+        const reservaTo = new Date(reserva.to);
+        return (
+          (from < reservaFrom && to > reservaFrom) || // Overlaps with start
+          (from < reservaTo && to > reservaTo) || // Overlaps with end
+          (from >= reservaFrom && to <= reservaTo) // Fully contained within reservation
+        );
+      })
+      .map((reserva) => reserva.bicicleta.$id);
 
-      if (from && to) {
-        return reservaFrom <= to && reservaTo >= from;
-      }
-      if (from) {
-        return reservaTo >= from;
-      }
-      if (to) {
-        return reservaFrom <= to;
-      }
-      return false;
-    };
-
-    const unavailableBicycleIds = new Set(
-      reservas.filter(isOverlapping).map((r) => r.bicycleId)
+    const availableBicycles = bicycles.filter(
+      (bicycle) => !reservedBicyclesInRange.includes(bicycle.$id)
     );
 
-    setFilteredBicycles(
-      bicycles.filter((bici) => !unavailableBicycleIds.has(bici.$id))
-    );
+    setFilteredBicycles(availableBicycles);
   }, [fromDate, toDate, bicycles, reservas]);
 
   return (
