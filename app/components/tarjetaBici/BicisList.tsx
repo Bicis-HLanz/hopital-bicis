@@ -48,25 +48,25 @@ export default function BicisList({ bicycles, reservas }: { bicycles: Bicycle[],
 
   return (
     <>
-      <h1 className={styles.title}>Bicicletas Disponibles</h1>
+      <div className={styles["bici-list-header"]}>
+          <h3 className={styles.title}>Disponibles de: </h3>
+          <input
+            className={styles.formInput}
+            type="date"
+            onChange={(e) => setFromDate(e.target.value)}
+            placeholder="desde"
+          />
+          <h3 className={styles.title}> a </h3>
+          <input
+            className={styles.formInput}
+            type="date"
+            id="to"
+            name="to"
+            onChange={(e) => setToDate(e.target.value)}
+            placeholder="hasta"
+          />
+      </div>
 
-      <section className={styles.filters}>
-        <input
-          className={styles.formInput}
-          type="date"
-          onChange={(e) => setFromDate(e.target.value)}
-          placeholder="desde"
-        />
-
-        <input
-          className={styles.formInput}
-          type="date"
-          id="to"
-          name="to"
-          onChange={(e) => setToDate(e.target.value)}
-          placeholder="hasta"
-        />
-      </section>
       <section>
         <ul className={styles["bici-card"]}>
           {filteredBicycles.map((doc) => (
