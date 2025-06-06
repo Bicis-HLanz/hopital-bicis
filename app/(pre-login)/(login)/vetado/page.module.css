@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: var(--background-light);
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--accent2));
+}
+
+.iconContainer {
+  margin: 0 auto 1.5rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent2);
+  border-radius: 50%;
+  color: var(--primary);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+}
+
+.title {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.message {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.contactInfo {
+  background-color: var(--primary-50);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  border-left: 4px solid var(--primary);
+}
+
+.contactInfo p {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .card {
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .message {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .iconContainer {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .message {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contactInfo {
+    padding: 1rem;
+  }
+  
+  .contactInfo p {
+    font-size: 0.85rem;
+  }
+}
