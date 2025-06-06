@@ -34,7 +34,6 @@ export async function signUpWithEmail(
       sameSite: "strict",
       secure: true,
     });
-
   } catch (error) {
     if (error instanceof AppwriteException) {
       switch (error.type) {
@@ -76,7 +75,7 @@ export async function signUpWithEmail(
     } else {
       return { message: "Error inesperado: " + error };
     }
-  } 
+  }
   redirect("/reservar");
 }
 
@@ -101,8 +100,6 @@ export async function logInWithEmail(
       sameSite: "strict",
       secure: true,
     });
-
-    
   } catch (error) {
     if (error instanceof AppwriteException) {
       switch (error.type) {
@@ -143,7 +140,9 @@ export async function logInWithEmail(
       }
     } else {
       if (error instanceof Error) {
-        return { message: "Error inesperado: " + error.message + "\n" + error.stack };
+        return {
+          message: "Error inesperado: " + error.message + "\n" + error.stack,
+        };
       } else {
         return { message: "Error inesperado: " + String(error) };
       }
@@ -173,7 +172,6 @@ export async function createReserva(
   };
   const { from, to } = data;
 
-
   // Validaciones simples
   if (from >= to) {
     return {
@@ -182,11 +180,12 @@ export async function createReserva(
   }
   if (from < new Date().toISOString()) {
     return {
-      message: "Error: La fecha de inicio no puede ser anterior a la fecha actual",
+      message:
+        "Error: La fecha de inicio no puede ser anterior a la fecha actual",
     };
   }
 
-  //si la diferencia entre from y to es mayor a 30 dias, retornar error
+  // Si la diferencia entre from y to es mayor a 30 dias, retornar error
   const fromDate = new Date(from);
   const toDate = new Date(to);
   const diffTime = Math.abs(toDate.getTime() - fromDate.getTime());
@@ -197,17 +196,22 @@ export async function createReserva(
     };
   }
 
-  // validar que el usuario no tenga una reserva activa
+  // Validar que el usuario no tenga una reserva activa
   const { databases } = await createSessionClient();
 
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
-  const collectionId = process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
+  const collectionId =
+    process.env.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID!;
 
-  const reservasActivas = await databases.listDocuments(databaseId, collectionId, [
-    Query.equal("userId", userId),
-    Query.equal("status", "reserved"),
-    Query.greaterThanEqual("from", new Date().toISOString()),
-  ]);
+  const reservasActivas = await databases.listDocuments(
+    databaseId,
+    collectionId,
+    [
+      Query.equal("userId", userId),
+      Query.equal("status", "reserved"),
+      Query.greaterThanEqual("from", new Date().toISOString()),
+    ]
+  );
 
   if (reservasActivas.total > 0) {
     return {
@@ -249,7 +253,6 @@ export async function cancelReserva(reserva: Reserva) {
   }
 }
 
-
 export async function vetarUsuario(userId: string) {
   const { users } = await createAdminClient();
 
@@ -257,7 +260,7 @@ export async function vetarUsuario(userId: string) {
 
   await users.updateLabels(
     userId,
-    user.labels ? [...user.labels, 'vetado'] : ['vetado']
+    user.labels ? [...user.labels, "vetado"] : ["vetado"]
   );
 }
 
@@ -274,16 +277,17 @@ export async function deleteBicycle(bicycleId: string) {
   }
 }
 
-export async function createBicycle(  prevState: { message: string },
-  formData: FormData) {
+export async function createBicycle(
+  prevState: { message: string },
+  formData: FormData
+) {
   const data = Object.fromEntries(formData.entries()) as {
     name: string;
     description: string;
     photo: File;
   };
 
-  const {name,description} = data;
-
+  const { name, description } = data;
 
   const { databases, storage, account } = await createSessionClient();
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -291,13 +295,13 @@ export async function createBicycle(  prevState: { message: string },
   const bucketId = process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!;
   const imageId = ID.unique();
   console.log(formData);
-  console.log("subiendo como " + (await account.get()).labels)
+  console.log("subiendo como " + (await account.get()).labels);
   try {
     await storage.createFile(bucketId, imageId, data.photo);
-    await databases.createDocument(databaseId,collectionId, ID.unique(), {
+    await databases.createDocument(databaseId, collectionId, ID.unique(), {
       name,
       description,
-      imageId
+      imageId,
     });
     console.log("subido");
     return { message: "Bicicleta creada con éxito" };
