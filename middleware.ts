@@ -23,6 +23,10 @@ function isAdmin(user: Models.User<Models.Preferences>) {
   return user.labels && user.labels.includes('admin')
 }
 
+function isVetado(user: Models.User<Models.Preferences>) {
+  return user.labels && user.labels.includes('vetado')
+}
+
 export async function middleware(request: NextRequest) {
   // Obtener la cookie de sesión
   const sessionCookie = request.cookies.get('my-custom-session')
@@ -40,6 +44,13 @@ export async function middleware(request: NextRequest) {
     // Si no se puede verificar el usuario, redirigir a login
     const loginUrl = new URL('/login', request.url)
     return NextResponse.redirect(loginUrl)
+  }
+
+  if (isVetado(user)) {
+    const accessDeniedUrl = new URL('/vetado', request.url)
+    
+
+    return NextResponse.redirect(accessDeniedUrl)
   }
 
   // Para rutas de gestionar, verificamos autenticación y autorización
