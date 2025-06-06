@@ -186,6 +186,17 @@ export async function createReserva(
     };
   }
 
+  //si la diferencia entre from y to es mayor a 30 dias, retornar error
+  const fromDate = new Date(from);
+  const toDate = new Date(to);
+  const diffTime = Math.abs(toDate.getTime() - fromDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  if (diffDays > 30) {
+    return {
+      message: "Error: La reserva no puede ser mayor a 30 días",
+    };
+  }
+
   // validar que el usuario no tenga una reserva activa
   const { databases } = await createSessionClient();
 
