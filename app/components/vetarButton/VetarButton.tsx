@@ -8,9 +8,10 @@ import { Models } from 'node-appwrite';
 interface VetarButtonProps {
   user: Models.User<Models.Preferences>;
   className?: string;
+  onVetar: () => void;
 }
 
-export default function VetarButton({ user, className = '' }: VetarButtonProps) {
+export default function VetarButton({ user, className = '', onVetar }: VetarButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleVetar = () => {
@@ -18,6 +19,7 @@ export default function VetarButton({ user, className = '' }: VetarButtonProps) 
 
     vetarUsuario(user.$id).then(() => {
       setIsLoading(false);
+      onVetar();
     });
   };
 

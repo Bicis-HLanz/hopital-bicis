@@ -9,15 +9,16 @@ import { Models } from "node-appwrite";
 
 export default function ClientUserList({ users }: { users: Models.User<Models.Preferences>[] }) {
   const [search, setSearch] = useState("");
+  const [usersList, setUsersList] = useState<Models.User<Models.Preferences>[]>(users);
   const [filteredUsers, setFilteredUsers] = useState<Models.User<Models.Preferences>[]>(users);
 
   useEffect(() => {
     const query = search.toLowerCase();
-    const result = users.filter(user =>
+    const result = usersList.filter(user =>
       user.email.toLowerCase().includes(query)
     );
     setFilteredUsers(result);
-  }, [search, users]);
+  }, [search, usersList]);
 
   return (
     <>
@@ -35,7 +36,12 @@ export default function ClientUserList({ users }: { users: Models.User<Models.Pr
               <h2 className={styles.userName}>{user.name}</h2>
               <p className={styles.userEmail}>{user.email}</p>
             </div>
-            <VetarButton user={user} className={styles.customButton} />
+            <VetarButton user={user} onVetar={() => {
+              const updatedUsers = usersList.map(u =>
+                u.$id === user.$id ? { ...u, labels: [...(u.labels || []), 'vetado'] } : u
+              )
+              setUsersList(updatedUsers);
+            }} className={styles.customButton} />
           </div>
         ))}
       </div>
