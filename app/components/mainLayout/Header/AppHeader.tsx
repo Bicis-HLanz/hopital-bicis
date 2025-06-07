@@ -1,17 +1,10 @@
-"use client";
-
-import React, { useState } from "react";
 import styles from "./AppHeader.module.css";
 import Link from "next/link";
 import Image from 'next/image';
 import AppNav from "../Nav/AppNav";
+import MobileBurger from "../MobileBurger/MobileBurger";
 
 const AppHeader: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   return (
     <>
@@ -64,40 +57,7 @@ const AppHeader: React.FC = () => {
 
         {/* Menú hamburguesa para móvil */}
         <div className={styles["mobile-menu"]}>
-          <button 
-            className={styles["hamburger"]} 
-            onClick={toggleMenu}
-            aria-label="Menú"
-          >
-            <div className={`${styles["hamburger-line"]} ${isMenuOpen ? styles["line1"] : ""}`}></div>
-            <div className={`${styles["hamburger-line"]} ${isMenuOpen ? styles["line2"] : ""}`}></div>
-            <div className={`${styles["hamburger-line"]} ${isMenuOpen ? styles["line3"] : ""}`}></div>
-          </button>
-
-          {isMenuOpen && (
-            <div className={styles["mobile-dropdown"]}>
-              <Link href="/documentacion" className={styles["mobile-link"]} onClick={toggleMenu}>
-                <Image
-                  src="/info.png" 
-                  alt="Documentación"
-                  width={24}
-                  height={24}
-                  className={styles["mobile-icon"]}
-                />
-                <span>Documentación</span>
-              </Link>
-              <Link href="/cuenta" className={styles["mobile-link"]} onClick={toggleMenu}>
-                <Image
-                  src="/userIcon.png" 
-                  alt="Perfil Usuario"
-                  width={24}
-                  height={24}
-                  className={styles["mobile-icon"]}
-                />
-                <span>Tu cuenta</span>
-              </Link>
-            </div>
-          )}
+          <MobileBurger />
         </div>
       </header>
 
