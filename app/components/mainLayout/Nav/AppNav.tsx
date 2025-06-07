@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./AppNav.module.css";
 import Link from "next/link";
+import { getLoggedInUser } from "@/appwriteServer";
 
-const AppNav: React.FC = () => {
+export default async function AppNav() {
+  const user = await getLoggedInUser();
+
+  const isAdmin = user?.labels?.includes("admin");
+
   return (
     <nav className={styles["app-nav"]}>
       <ul>
@@ -34,22 +39,22 @@ const AppNav: React.FC = () => {
             Tus Reservas
           </Link>
         </li>
-        <li>
-          <Link href="/gestionar">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              className={styles["icono"]}
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            Admin
-          </Link>
-        </li>
+        {isAdmin && (
+          <li>
+            <Link href="/gestionar">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                className={styles["icono"]}
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Admin
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
-};
-
-export default AppNav;
+}
