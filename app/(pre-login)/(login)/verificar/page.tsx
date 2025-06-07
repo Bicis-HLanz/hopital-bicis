@@ -74,7 +74,7 @@ export default function VerificarPage() {
                 <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <h1 className={styles.title}>Error en la verificación</h1>
+            <h1 className={styles.title}>Verifícate.</h1>
             <p className={styles.message}>
               {errorMessage || "Ha ocurrido un error durante la verificación de tu cuenta."}
             </p>
@@ -85,7 +85,7 @@ export default function VerificarPage() {
               >
                 Reenviar email de verificación
               </button>
-              <Link href="/login" className={styles.primaryButton}>
+              <Link href="/cuenta" className={styles.primaryButton}>
                 Volver al inicio de sesión
               </Link>
             </div>
