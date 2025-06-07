@@ -27,6 +27,10 @@ function isVetado(user: Models.User<Models.Preferences>) {
   return user.labels && user.labels.includes('vetado')
 }
 
+function isVerificado(user: Models.User<Models.Preferences>) {
+  return user.emailVerification
+}
+
 export async function middleware(request: NextRequest) {
   // Obtener la cookie de sesión
   const sessionCookie = request.cookies.get('my-custom-session')
@@ -46,10 +50,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
+  if( !isVerificado(user)) {
+    // Si el usuario no está verificado, redirigir a verificar
+    const verifyUrl = new URL('/verificar', request.url)
+    return NextResponse.redirect(verifyUrl)
+  }
+
   if (isVetado(user)) {
     const accessDeniedUrl = new URL('/vetado', request.url)
     
-
     return NextResponse.redirect(accessDeniedUrl)
   }
 
