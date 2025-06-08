@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install && npm run build
+RUN npm install
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npm run build && npm start"]
