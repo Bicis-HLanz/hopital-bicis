@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   web:
-    image: .
+    image: hospital-bicis-web:latest
     container_name: nextjs-hospital-bicis
     ports:
       - 3000:3000
