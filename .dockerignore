@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables
+.env*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Git
+.git/
+.github/
+.gitignore
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.DS_Store
+README.md
+LICENSE
+*.md
