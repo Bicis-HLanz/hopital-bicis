@@ -5,6 +5,7 @@ import { createAdminClient, createSessionClient, createVerficationMail } from "@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Reserva from "./models/Reserva";
+import { Bicycle } from "./models/Bicycle";
 
 export async function signUpWithEmail(
   prevState: { message: string },
@@ -307,13 +308,16 @@ export async function vetarUsuario(userId: string) {
   );
 }
 
-export async function deleteBicycle(bicycleId: string) {
-  const { databases } = await createSessionClient();
+export async function deleteBicycle(bicycle: Bicycle) {
+  const { databases, storage } = await createSessionClient();
   const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!;
   const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID!;
+  const bucketId = process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!;
 
   try {
-    await databases.deleteDocument(databaseId, collectionId, bicycleId);
+    await databases.deleteDocument(databaseId, collectionId, bicycle.$id);
+    await storage.deleteFile(bucketId, bicycle.imageId);
+
     return { message: "Bicicleta eliminada con éxito" };
   } catch (error) {
     return { message: "Error al eliminar la bicicleta: " + error };
